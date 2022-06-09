@@ -4,7 +4,13 @@ with pkgs;
 
 mkShell {
   buildInputs = [
-    apacheHttpd
+    nodePackages.pyright
     python310
+    python310Packages.flask
   ];
+
+  shellHook = ''
+  export FLASK_APP=main
+'';
+
 }
