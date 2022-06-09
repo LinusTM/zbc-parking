@@ -11,6 +11,6 @@ mkShell {
 
   shellHook = ''
   export FLASK_APP=main
-'';
+  '';
 
 }
