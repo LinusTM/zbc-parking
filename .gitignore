@@ -3,8 +3,17 @@
 *.log
 tmp/
 
-*.py[cod]
-*.egg
-build
-htmlcov
-*__pycache__
+venv/
+
+*.pyc
+__pycache__/
+
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/
