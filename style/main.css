@@ -1,0 +1,19 @@
+#main-grid {
+    display: grid;
+}
+
+#map {
+    grid-area: map;
+}
+
+#free {
+
+}
+
+#free-worker {
+
+}
+
+#free-guest {
+
+}
