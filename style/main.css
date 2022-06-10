@@ -1,9 +1,9 @@
 #main-grid {
-    display: grid;
+	display: grid;
 }
 
 #map {
-    grid-area: map;
+	grid-area: map;
 }
 
 #free {
