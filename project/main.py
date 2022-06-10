@@ -9,3 +9,6 @@ app.register_blueprint(registration)
 @app.route("/")
 def main_page():
 	return render_template("main.html", test_var="test")
+
+if __name__ == "__main__":
+    app.run(debug=True)
