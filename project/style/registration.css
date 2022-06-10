@@ -1,0 +1,36 @@
+#registrationGroup {
+	display: inline-grid;
+	justify-items: center;
+	margin-top: 8%;
+	width: 100%;
+	grid-template-columns: 100%;
+	grid-template-rows: auto;
+	grid-template-areas:
+	"title"
+	"fname"
+	"lname"
+	"email"
+	"role"
+	"submit";
+}
+
+#title {
+	font-size: 1rem;
+	margin-bottom: 1rem;
+}
+
+#fname {
+	grid-area: fname;
+}
+
+#lname {
+	grid-area: lname;
+}
+
+#email {
+	grid-area: email;
+}
+
+#submit {
+	grid-area: submit;
+}
