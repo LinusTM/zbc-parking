@@ -7,13 +7,13 @@
 }
 
 #free {
-
+	grid-area: free;
 }
 
 #free-worker {
-
+	grid-area: free-worker;
 }
 
 #free-guest {
-
+	grid-area: free-guest;
 }
