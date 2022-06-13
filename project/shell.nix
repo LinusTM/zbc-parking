@@ -13,6 +13,7 @@ in mkShell {
 		nodePackages.pyright
 		python310
 		python310Packages.flask
+		python310Packages.psycopg2
 		myWerkzeug
 	];
 
