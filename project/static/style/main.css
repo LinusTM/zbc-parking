@@ -1,54 +1,57 @@
+body {
+	background-color: #1d1d2c;
+}
+
 .container {
 	margin: 1em;
+	width: 30em;
 	gap: 1em;
-	grid-auto-rows: minmax(10em, auto);
 	display: grid;
-	justify-content: center;
 	grid-template-areas:
-		"map free"
-		"map free-worker"
-		"map free-guest";
+		"staff students"
+		"guests guests";
 }
 
 .container > div {
-	min-width: 20em;
+	margin: 2em;
+	width: 20em;
 	border-radius: 10px;
 	padding: 1em;
-	box-shadow: 4px 3px 4px darkgray;
+	background-color: #373833;
 }
 
-#map {
+.map {
 	grid-area: map;
-	min-width: 30em;
+	width: 20em;
 
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 1em;
-	background-color: #438945;
 }
 
-#map > div {
-	height: 15em;
+.map > div {
+	height: 10em;
 	transition: 0.3s;
 	border-radius: 2px;
-	background-color: whitesmoke;
+	background-color: lightgray;
 }
 
-#map > div:hover {
-	background-color: darkgray;
+.map > div:hover {
+	background-color: #373833;
 }
 
-#free {
-	grid-area: free;
-	background-color: #3cbcc3;
+.map-header {
+	color: #E8EAE3;
 }
 
-#free-worker {
-	grid-area: free-worker;
-	background-color: #eba63f;
+#staff {
+	grid-area: staff;
 }
 
-#free-guest {
-	grid-area: free-guest;
-	background-color: #e40c2b;
+#students {
+	grid-area: students;
+}
+
+#guests {
+	grid-area: guests;
 }
