@@ -18,7 +18,14 @@ class ParkingSpot:
 
 def GetConnection():
     try:
-        conn = psycopg2.connect("dbname=zbcparking user=postgres password=1H24w87lm")
+        local_conn = psycopg2.connect("dbname=zbcparking user=postgres password=1H24w87lm")
+        conn = psycopg2.connect(
+            host="http://10.108.137.178:5050/",
+            database="parking_lot",
+            user="admin@admin.com",
+            password="root"
+        )
+
         if conn is not None:
             return conn
         else:
