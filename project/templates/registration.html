@@ -17,29 +17,36 @@
 		<div id="title">
 			<h1>Registrer</h1>
 		</div>
-		<div id="fname">
-			<label for="fname">Fornavn</label><br>
-			<input type="text" id="fname" name="fname"><br><br>
-		</div>
-		<div id="lname">
-			<label for="lname">Efternavn</label><br>
-  			<input type="text" id="lname" name="lname"><br><br>
-		</div>
-		<div id="email">
-			<label for="email">E-mail</label><br>
-  			<input type="text" id="lname" name="lname"><br><br>
-		</div>
-		<div id="role">
-			<label for="role">Rolle</label><br>
-			<select name="role" multiple>
-				<option value="1">Gæst</option>
-				<option value="2">Medarbejder</option>
-				<option value="3">Elev</option>
-			</select><br><br>
-		</div>
-		<div id="submit">
-			 <button type="button">Tilføj bruger</button> 
-		</div>
+
+		<form method="POST" name="person">
+			<div id="fname">
+				<label for="fname">Fornavn</label><br>
+				<input type="text" id="fname" name="fname"><br><br>
+			</div>
+
+			<div id="lname">
+				<label for="lname">Efternavn</label><br>
+				<input type="text" id="lname" name="lname"><br><br>
+			</div>
+
+			<div id="email">
+				<label for="email">E-mail</label><br>
+				<input type="text" id="email" name="email"><br><br>
+			</div>
+
+			<div id="role">
+				<label for="role">Rolle</label><br>
+				<select name="role" multiple>
+					<option value="1">Gæst</option>
+					<option value="2">Medarbejder</option>
+					<option value="3">Elev</option>
+				</select><br><br>
+			</div>
+
+			<div id="submit">
+				<input type="submit" value=Register> 
+			</div>
+		</form>
 	</div>
 </body>
 
