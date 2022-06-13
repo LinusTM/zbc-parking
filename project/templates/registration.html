@@ -10,6 +10,10 @@
 
 	<link rel="stylesheet" href="{{ url_for('static',filename='style/registration.css') }}" type="text/css" media="screen" />
 	<!-- Place favicon.ico in the root directory -->
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
 </head>
 
 <body>
@@ -21,22 +25,22 @@
 		<form method="POST" name="person">
 			<div id="fname">
 				<label for="fname">Fornavn</label><br>
-				<input type="text" id="fname" name="fname"><br><br>
+				<input type="text" name="fname"><br><br>
 			</div>
 
 			<div id="lname">
 				<label for="lname">Efternavn</label><br>
-				<input type="text" id="lname" name="lname"><br><br>
+				<input type="text" name="lname"><br><br>
 			</div>
 
 			<div id="email">
 				<label for="email">E-mail</label><br>
-				<input type="text" id="email" name="email"><br><br>
+				<input type="text" name="email"><br><br>
 			</div>
 
 			<div id="role">
 				<label for="role">Rolle</label><br>
-				<select name="role" multiple>
+				<select name="role">
 					<option value="1">Gæst</option>
 					<option value="2">Medarbejder</option>
 					<option value="3">Elev</option>
@@ -44,7 +48,7 @@
 			</div>
 
 			<div id="submit">
-				<input type="submit" value=Register> 
+					<button type="submit" value=Register>Tilføj bruger</button> 
 			</div>
 		</form>
 	</div>

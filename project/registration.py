@@ -1,7 +1,15 @@
 from flask import Blueprint, render_template, request
 from wtforms import Form, SelectField, StringField, validators
+from dataclasses import dataclass
 
 registration = Blueprint('registration', __name__)
+
+@dataclass
+class Person:
+    fname: str
+    lname: str
+    email: str
+    role: int
 
 class RegistrationForm(Form):
     fname   = StringField('fname', [validators.Length(min=4, max=25)])
@@ -13,17 +21,17 @@ class RegistrationForm(Form):
 def registration_page():
     form = RegistrationForm()
     if request.method == 'POST' and form.validate():
-        person.fname = form.fname.data 
-        person.lname = form.lname.data 
-        person.email = form.email.data
-        person.role = form.role.data
+        Person.fname = form.fname.data 
+        Person.lname = form.lname.data 
+        Person.email = form.email.data
+        Person.role = form.role.data
 
         # Send values to database
         cur.execute("""
             INSERT INTO people(fname, lname, email, role_id)
             VALUES (%S, %S, %S, %S)
             """,
-            (person.fname, person.lname, person.email, person.role))
+            (Person.fname, Person.lname, Person.email, Person.role))
 
     return render_template("registration.html", form=form)
 

@@ -1,7 +1,7 @@
 #registrationGroup {
 	display: inline-grid;
 	justify-items: center;
-	margin-top: 8%;
+	margin-top: 2%;
 	width: 100%;
 	grid-template-columns: 100%;
 	grid-template-rows: auto;
@@ -34,3 +34,36 @@
 #submit {
 	grid-area: submit;
 }
+
+* {
+	font-family: 'Lato', sans-serif;
+}
+
+button {
+	background-color: #282828;
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 4px;
+	height: 3rem; 
+	width: 20rem;
+	transition: 0.3;
+}
+
+button:hover {
+	background-color: #3c3836;
+}
+
+select,
+input {
+	font-size: 16px;
+	border: none;
+	border-bottom: 2px solid #282828;
+	height: 2rem; 
+	width: 20rem;
+	background-color: transparent;
+}
+
