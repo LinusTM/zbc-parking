@@ -2,20 +2,21 @@
 
 {% block title%}ZBC - Parking lot{% endblock %}
 {% block head %}
-	{{ super() }}
-	<link rel="stylesheet" href="{{ url_for('static',filename='style/parking.css') }}" type="text/css" media="screen" />
-	<script type="text/javascript">
-        var spots = '{{ spots | tojson }}';
-    </script>
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static',filename='style/parking.css') }}" type="text/css" media="screen" />
+<script type="text/javascript">
+	var spots = '{{ spots | tojson }}';
+</script>
 {% endblock %}
 
 {% block content %}
+<div id="ParkingPageContainer">
 	<div id="parkingLot">
 		<div id="staff-parking-div" class="parking-group-div">
 			<label class="parking-text-label">Employees</label>
 			<div class="table-div">
 				<table class="parking-table" id="parking-staff">
-					
+
 				</table>
 			</div>
 		</div>
@@ -24,7 +25,7 @@
 			<label class="parking-text-label">Students</label>
 			<div class="table-div">
 				<table class="parking-table" id="parking-students">
-					
+
 				</table>
 			</div>
 		</div>
@@ -33,13 +34,14 @@
 			<label class="parking-text-label">Guests</label>
 			<div class="table-div">
 				<table class="parking-table" id="parking-guests">
-					
+
 				</table>
 			</div>
 		</div>
 	</div>
 
-	{% block sideBarContent %}
+	<div id="SideBar">
+
 		<div id="parkSpaceInfoBox">
 			<div id="infoBoxRole">
 
@@ -48,8 +50,8 @@
 
 			</div>
 		</div>
-	{% endblock %}
+	</div>
+</div>
 
-   
-    <script type="text/javascript" src="{{ url_for('static',filename='style/tables.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='style/tables.js') }}"></script>
 {% endblock %}

@@ -20,11 +20,15 @@ def main_page():
    #roles = GetActiveRoles()
    #return render_template("registerPerson.html", roles = roles)
 
+@app.route("/parking")
+def parking_page():
+   spots = GetParkingSpots()  
+   return render_template("parking.html", spots=spots)
+
 @app.route("/admin/register/person")
 def register_person():
    roles = GetActiveRoles()
    return render_template("registerPerson.html", roles = roles)
-
 
 @app.route("/data/spots")
 def get_spots():

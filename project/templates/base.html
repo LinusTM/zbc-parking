@@ -16,23 +16,18 @@
         <div id="logo">
             <img src="{{ url_for('static',filename='style/Images/zbc_parking.png') }}">
         </div>
-        <nav id="Navbar">
-            <a class="NavItem">Parking lot</a>
+        <nav id="navBar">
+            <a class="nav-item" href="parking">
+                Parking lot
+            </a>
         </nav>
         {% endblock %}
     </header>
 
     <div id="contentWrapper">
-        <div id="mainPageContent">
-            {% block content %}
-    
-            {% endblock %}
-        </div>
-        <div id="sideBarContainer">
-            {% block sideBarContent %}
+        {% block content %}
 
-            {% endblock %}
-        </div>
+        {% endblock %}
     </div>
     
 </body>

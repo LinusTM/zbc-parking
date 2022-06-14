@@ -1,7 +1,20 @@
+#ParkingPageContainer {
+    display: flex;
+}
+
+#SideBar {
+    width: 20%;
+    background-color: var(--main-background);
+}
+
 #parkingLot {
+    width: 80%;
+    height: 100vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    border-top: 3px solid #9497a7;
+    border-right: 3px solid #9497a7;
 }
 
 .parking-group-div {
@@ -33,6 +46,9 @@
 .parking-table td {
     width: 70px;
     height: 120px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 80%;
 }
 
 
