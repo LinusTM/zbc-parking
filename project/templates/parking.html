@@ -1,70 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
+
+{% block title%}ZBC - Parking lot{% endblock %}
+{% block head %}
+	{{ super() }}
 	<link rel="stylesheet" href="{{ url_for('static',filename='style/parking.css') }}" type="text/css" media="screen" />
-    <title>Document</title>
-    <script type="text/javascript">
+	<script type="text/javascript">
         var spots = '{{ spots | tojson }}';
     </script>
-</head>
-<body>
-	<div id="menu-panel">
-		<div id="parking-div">
-			<div id="top-row" style="display: flex">
-				<div id="staff-parking-div" class="parking-group-div">
-					<label class="parking-text-label">Employees</label>
-					<div class="table-div">
-						<table class="parking-table" id="parking-staff">
-						   
-						</table>
-					</div>
-				</div>
-	
-				<div id="students-parking-div" class="parking-group-div">
-					<label class="parking-text-label">Students</label>
-					<div class="table-div">
-						<table class="parking-table" id="parking-students">
-						   
-						</table>
-					</div>
-				</div>
+{% endblock %}
+
+{% block content %}
+	<div id="parkingLot">
+		<div id="staff-parking-div" class="parking-group-div">
+			<label class="parking-text-label">Employees</label>
+			<div class="table-div">
+				<table class="parking-table" id="parking-staff">
+					
+				</table>
 			</div>
-			
-			<div id="bottom-row">
-				<div id="guests-parking-div" class="parking-group-div">
-					<label class="parking-text-label">Guests</label>
-					<div class="table-div">
-						<table class="parking-table" id="parking-guests">
-						   
-						</table>
-					</div>
-				</div>
-			</div>
-			
-			
 		</div>
-    </div>
+
+		<div id="students-parking-div" class="parking-group-div">
+			<label class="parking-text-label">Students</label>
+			<div class="table-div">
+				<table class="parking-table" id="parking-students">
+					
+				</table>
+			</div>
+		</div>
+
+		<div id="guests-parking-div" class="parking-group-div">
+			<label class="parking-text-label">Guests</label>
+			<div class="table-div">
+				<table class="parking-table" id="parking-guests">
+					
+				</table>
+			</div>
+		</div>
+	</div>
+
+	{% block sideBarContent %}
+		<div id="parkSpaceInfoBox">
+			<div id="infoBoxRole">
+
+			</div>
+			<div id="infoBoxNumber">
+
+			</div>
+		</div>
+	{% endblock %}
+
    
-    
-<!-- 
-	<div class="table-div">
-        <table class="parking-table" id="parking-employees">
-            
-        </table>
-    </div>
-
-	<div class="table-div">
-        <table class="parking-table" id="parking-students">
-            
-        </table>
-    </div> -->
-
-
-
     <script type="text/javascript" src="{{ url_for('static',filename='style/tables.js') }}"></script>
-
-</body>
-</html>
+{% endblock %}

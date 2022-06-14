@@ -18,16 +18,16 @@ class ParkingSpot:
 
 def GetConnection():
     try:
-        conn = psycopg2.connect("dbname=zbcparking user=postgres password=1H24w87lm")
-        #conn = psycopg2.connect("dbname=zbcparking user=postgres password=password")
+        # conn = psycopg2.connect("dbname=zbcparking user=postgres password=password")
 
-        # conn = psycopg2.connect(
-        #     host="http://10.108.137.178:5050/",
-        #     database="parking_lot",
-        #     user="admin@admin.com",
-        #     password="root"
-        # )
-
+        conn = psycopg2.connect(
+            host="10.108.149.16",
+            database="parking_lot",
+            user="root",
+            password="root",
+            port="5432"
+        )
+        
         if conn is not None:
             return conn
         else:
@@ -56,7 +56,7 @@ def SetSpotStatus(spot_number, spot_type, occupied):
     try:
         conn = GetConnection()
         cur = conn.cursor()
-        cur.execute('UPDATE parking_spots SET occupied = %(occupied)s WHERE spot_id = %(spot_number)s AND spot_role_type = %(spot_type)s', {'occupied': occupied, 'spot_number': spot_number, 'spot_type': spot_type})
+        cur.execute('UPDATE parking_spots SET occupied = %(occupied)s WHERE spot_number = %(spot_number)s AND spot_role_type = %(spot_type)s', {'occupied': occupied, 'spot_number': spot_number, 'spot_type': spot_type})
         modified = cur.rowcount > 0
         conn.commit()
 
@@ -73,7 +73,7 @@ def GetSpot(type, number):
         conn = GetConnection()
         cur = conn.cursor()
 
-        cur.execute('SELECT * from parking_spots where spot_id = %(number)s AND spot_role_type = %(type)s', {'number': number, 'type': type})
+        cur.execute('SELECT * from parking_spots where spot_number = %(number)s AND spot_role_type = %(type)s', {'number': number, 'type': type})
         spot = cur.fetchone()
 
         return spot
@@ -94,7 +94,7 @@ def GetSpots():
         cur = conn.cursor()
         
     # execute a statement
-        cur.execute("SELECT spot_id, occupied, spot_role_type FROM parking_spots")
+        cur.execute("SELECT spot_number, occupied, spot_role_type FROM parking_spots")
         spots = []
 
         rows = cur.fetchall()

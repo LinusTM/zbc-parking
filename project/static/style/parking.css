@@ -1,41 +1,14 @@
-body {
-
-}
-
-#menu-panel {
-    height: 100vh;
+#parkingLot {
     display: flex;
-    /*background: linear-gradient(0deg, rgb(120, 120, 120) 10%, rgb(70, 70, 70) 100%);*/
-    background: #4c4e57;
-}
-
-#top-row {
-    /* align-items: center;
-    justify-content: center; */
-}
-
-#bottom-row {
-    margin-left: 300px;
-    margin-top: 50px;
-}
-
-#parking-div {
-    margin-top: 80px;
-    width: 80vw;
-    background: url("../style/Images/background.png") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    border-top: 3px solid #9497a7;
-    border-right: 3px solid #9497a7;
-    
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .parking-group-div {
-    width: 280px;
+    width: 40%;
     text-align: center;
-    margin-left: 300px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .parking-text-label {    
@@ -48,22 +21,18 @@ body {
 
 .table-div {
     margin-top: 50px;
-    margin-right: 100px;
-    /* background-color: aquamarine; */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .parking-table {
-    /* background-color: rgb(200, 200, 200); */
     table-layout: fixed;
     border-spacing: 0;
 }
 
 .parking-table td {
-    /*height: 25px;*/
-    /*width: 25px;*/
     width: 70px;
     height: 120px;
-
 }
 
 
