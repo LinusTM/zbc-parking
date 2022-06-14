@@ -1,5 +1,6 @@
 const maxRows = 2;
 const maxColumns = 4;
+const maxSpots = 8;
 
 var table_guests = document.getElementById('parking-guests');
 var table_staff = document.getElementById('parking-staff');
@@ -16,78 +17,45 @@ function tableCreate(table, type){
 
   var sortedArray = parking_spots.filter(spot => spot.type === type)
 
+  // Order the list based on spot number
+  sortedArray.sort((a, b) => (a.number > b.number) ? 1 : -1)
+
   var tr1 = table.insertRow();  
   var tr2 = table.insertRow();
+  var index = 0;
 
-  var td1_0 = tr1.insertCell();
+  for(var i = 0; i < 4; i++){
 
-  td1_0.onclick = function () {
-            tableCellClick(sortedArray[0]);
-        };        
+    addTableCell(sortedArray[index], tr1);
+    index++;
+    addTableCell(sortedArray[index], tr2);
+    index++;
+    }
 
+}
 
-  var td1_1 = tr1.insertCell();
+  function addTableCell(spot, row) {
+    var td = row.insertCell();
+    td.onclick = function () {
+      tableCellClick(spot);
+    }; 
 
-  td1_1.onclick = function () {
-    tableCellClick(sortedArray[1]);
-         };
-
-  if(!sortedArray[0].occupied) {
-    td1_0.classList.add('spot-free');
-  } else {
-    td1_1.classList.add('spot-taken');
-  }
-  
-
-
-
-  var td1_2 = tr1.insertCell();
-
-  var td1_3 = tr1.insertCell();
-
-  var td2_0 = tr2.insertCell();
-  var td2_1 = tr2.insertCell();
-  var td2_2 = tr2.insertCell();
-  var td2_3 = tr2.insertCell();
-
-  // for(var i = 0; i < maxRows; i++){
-
-      // var tr1 = mainTable.insertRow();
-      // var tr2 = mainTable.insertRow();
-
- 
-
-      // for(var j = 0; j < maxColumns; j++){
-      //     var td = tr.insertCell();
-      //     td.xPos = j;
-      //     td.yPos = i;
-      //     td.stype = spots
-      //     td.visited = false;
-
-      //     td.onclick = function () {
-      //         tableCellClick(this);
-      //     };
-
-
-
-      //     // td.addEventListener('mousemove', function () {
-      //     //     tableCellMouseMove(this);
-      //     // })
-
-      //     // td.addEventListener('mouseclick', function () {
-      //     //     tableCellClick(this);
-      //     // })
-
-      //     td.classList.add('empty-cell');
-      //     //td.onclick
-      //     //td.addEventListener("click", tableCellClick(this), false);
-
-
-      // }
+         
+    if(spot.occupied) {
+      var imageAddress = "url('../static/style/Images/" + getRandomCarImage() + "')"
+      td.style.backgroundImage = imageAddress; //"url('../static/style/Images/')";
+    } else {
+      td.style.backgroundImage = '';
+    }
   }
 
   function tableCellClick(spot){
     console.log(spot);
+  }
+
+  function getRandomCarImage(){
+    var rnd = Math.floor(Math.random() * 10) + 1;
+    return 'car' + rnd + '.png';
   }
 
 

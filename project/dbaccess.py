@@ -6,7 +6,6 @@ conn = None
 
 @dataclass
 class ParkingSpot:
-    """Class for keeping track of an item in inventory."""
     type: str
     number: int
     occupied: bool
@@ -15,6 +14,16 @@ class ParkingSpot:
         self.type = type
         self.number = number
         self.occupied = occupied
+
+@dataclass
+class Role:
+    name: str
+    id: int
+    occupied: bool
+
+    def __init__(self, name: str, id: int):
+        self.name = name
+        self.id = id
 
 def GetConnection():
     try:
@@ -35,6 +44,32 @@ def GetConnection():
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
+
+def GetRoles():
+    try:
+        conn = GetConnection()
+        
+        # create a cursor
+        cur = conn.cursor()
+        
+    # execute a statement
+        cur.execute("SELECT * FROM roles")
+        roles = []
+
+        rows = cur.fetchall()
+
+        for row in rows:
+            role = Role(row[1], row[0])
+            roles.append(role)
+        
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        cur.close()
+        if conn is not None:
+            conn.close()
+        return roles
+
 
 def CreateNewPerson(fname, lname, email, role_id):
     try:

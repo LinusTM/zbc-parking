@@ -14,8 +14,17 @@ def main_page():
    # ChangeSpotStatus(5, 1, True)
    # print(GetSpot(1, 5))
    # InsertNewPerson('carlo', 'ms', 'carletto@gmail.com', 2)
+   #GenerateUUIDs()
    spots = GetParkingSpots()  
    return render_template("parking.html", spots=spots)
+   #roles = GetActiveRoles()
+   #return render_template("registerPerson.html", roles = roles)
+
+@app.route("/admin/register/person")
+def register_person():
+   roles = GetActiveRoles()
+   return render_template("registerPerson.html", roles = roles)
+
 
 @app.route("/data/spots")
 def get_spots():
