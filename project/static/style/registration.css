@@ -1,36 +1,31 @@
-#registrationGroup {
-	display: inline-grid;
-	justify-items: center;
-	margin-top: 8%;
-	width: 100%;
-	grid-template-columns: 100%;
-	grid-template-rows: auto;
-	grid-template-areas:
-	"title"
-	"fname"
-	"lname"
-	"email"
-	"role"
-	"submit";
+#menu-panel {
+    height: 100vh;
+    display: flex;
+    /*background: linear-gradient(0deg, rgb(120, 120, 120) 10%, rgb(70, 70, 70) 100%);*/
+    background: #4c4e57;
 }
 
-#title {
-	font-size: 1rem;
-	margin-bottom: 1rem;
+.page-div {
+    margin-top: 80px;
+    width: 80vw;
+    background: url("../style/Images/background.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    border-top: 3px solid #9497a7;
+    border-right: 3px solid #9497a7;	
 }
 
-#fname {
-	grid-area: fname;
+p {
+	color: white;
 }
 
-#lname {
-	grid-area: lname;
-}
-
-#email {
-	grid-area: email;
-}
-
-#submit {
-	grid-area: submit;
-}
+input[type=text] {
+    width: 200px;
+    height: 35px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: #c5c5c5;
+  }

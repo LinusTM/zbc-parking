@@ -1,8 +1,21 @@
 from random import getstate
-
+import uuid
 from dbaccess import *
 
+def GenerateUUIDs():
+    uuids = []
+    for i in range(10):
+        new_uuid = uuid.uuid1()
+        string_uuid = str(new_uuid)
+        fixed_uuid = string_uuid[0:4] + string_uuid[19:23]
+        uuids.append(fixed_uuid)
+        print(fixed_uuid)
+    
 
+    
+def GetActiveRoles():
+    roles = GetRoles()
+    return roles
 
 def GetParkingSpots():
     spots = GetSpots()
