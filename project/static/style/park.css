@@ -1,0 +1,54 @@
+.container {
+	margin: 1em;
+	gap: 1em;
+	grid-auto-rows: minmax(10em, auto);
+	display: grid;
+	justify-content: center;
+	grid-template-areas:
+		"map free"
+		"map free-worker"
+		"map free-guest";
+}
+
+.container > div {
+	min-width: 20em;
+	border-radius: 10px;
+	padding: 1em;
+	box-shadow: 4px 3px 4px darkgray;
+}
+
+#map {
+	grid-area: map;
+	min-width: 30em;
+
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1em;
+	background-color: #438945;
+}
+
+#map > div {
+	height: 15em;
+	transition: 0.3s;
+	border-radius: 2px;
+	background-color: whitesmoke;
+}
+
+#map > div:hover {
+	background-color: darkgray;
+}
+
+#free {
+	grid-area: free;
+	background-color: #3cbcc3;
+}
+
+#free-worker {
+	grid-area: free-worker;
+	background-color: #eba63f;
+}
+
+#free-guest {
+	grid-area: free-guest;
+	background-color: #e40c2b;
+}

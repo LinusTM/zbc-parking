@@ -1,4 +1,5 @@
 from random import getstate
+
 from dbaccess import *
 
 
@@ -14,5 +15,20 @@ def GetParkingSpots():
             spot.type = 'Guest'
 
     return spots
+
+def InsertNewPerson(fname, lname, email, role_id):
+    modified = CreateNewPerson(fname, lname, email, role_id)
+    return modified
+
+def GetRoleFromPbizz(serial):
+    return 2
         
+def GetParkingSpot():
+    spot = GetSpot(1, 2)
+    print(f'Spot data: {spot}')
+
+def ChangeSpotStatus(spot_number, spot_type, occupied):
+    modified = SetSpotStatus(spot_number, spot_type, occupied)
+
+
 

@@ -4,44 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="{{ url_for('static',filename='style/park.css') }}" type="text/css" media="screen" />
+	<link rel="stylesheet" href="{{ url_for('static',filename='style/parking.css') }}" type="text/css" media="screen" />
     <title>Document</title>
     <script type="text/javascript">
-        var spots = '{{ spots }}';
+        var spots = '{{ spots | tojson }}';
     </script>
 </head>
 <body>
-    <div class="container">
-		<div id="map">
-            {% for  %}
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
+	<div id="menu-panel">
+		<div id="parking-div">
+			<div id="top-row" style="display: flex">
+				<div id="staff-parking-div" class="parking-group-div">
+					<label class="parking-text-label">Employees</label>
+					<div class="table-div">
+						<table class="parking-table" id="parking-staff">
+						   
+						</table>
+					</div>
+				</div>
+	
+				<div id="students-parking-div" class="parking-group-div">
+					<label class="parking-text-label">Students</label>
+					<div class="table-div">
+						<table class="parking-table" id="parking-students">
+						   
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div id="bottom-row">
+				<div id="guests-parking-div" class="parking-group-div">
+					<label class="parking-text-label">Guests</label>
+					<div class="table-div">
+						<table class="parking-table" id="parking-guests">
+						   
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			
 		</div>
+    </div>
+   
+    
+<!-- 
+	<div class="table-div">
+        <table class="parking-table" id="parking-employees">
+            
+        </table>
+    </div>
 
-		<div id="free">
-			<h1>free</h1>
-		</div>
-
-		<div id="free-worker">
-			<h1>free-worker</h1>
-		</div>
-
-		<div id="free-guest">
-			<h1>free-guest</h1>
-		</div>
-	</div>
-
-    <!-- <div id="table-div">
-        <table id="main-table">
-            {% for spot in spots %}
-            {% if spot.type == 'Staff' %}
-		        <tr>{{spot.number}} {{spot.type}}</tr>
-                {% endif %}
-	    	{% endfor %}
+	<div class="table-div">
+        <table class="parking-table" id="parking-students">
+            
         </table>
     </div> -->
 
