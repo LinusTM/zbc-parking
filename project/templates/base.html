@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style/base.css') }}" type="text/css" media="screen" />
+
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+    <header>
+        {% block header %}
+        <div id="logo">
+            <img src="{{ url_for('static',filename='style/Images/zbc_parking.png') }}">
+        </div>
+        <nav id="Navbar">
+            <a class="NavItem">Parking lot</a>
+        </nav>
+        {% endblock %}
+    </header>
+
+    <div id="contentWrapper">
+        <div id="mainPageContent">
+            {% block content %}
+    
+            {% endblock %}
+        </div>
+        <div id="sideBarContainer">
+            {% block sideBarContent %}
+
+            {% endblock %}
+        </div>
+    </div>
+    
+</body>
+</html>
