@@ -1,41 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="{{ url_for('static',filename='style/registration.css') }}" type="text/css" media="screen" />
-    <title>Document</title>
-</head>
-<body>
-	<div id="menu-panel">
-		<div class="page-div">
-			<div class="reg-main-div">
-                <div class="reg-title">
+{% extends "base.html" %}
 
-                </div>
-                <div class="reg-main-form">
-                    <form action="/registerPerson" method = "POST">
-                        <p>First Name: <input type = "text" class="input-asphalt" required name = "first-name"/></p>
-                        <p>Last Name: <input type = "text" class="input-asphalt" required name = "first-name"/></p>
-                        <p>Email Name: <input type = "text" class="input-asphalt" required name = "first-name" pattern="^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$" title="Invalid Email"/></p>
-                        <p>Role:<select name="role" id="role">
-                            {% for role in roles %}
-                            <option value="{{ role.id }}">{{ role.name }}</option>
-                            {% endfor %}
-                          </select></p>
-                        <p><input type = "submit" value = "submit" /></p>
-                    </form>
-                </div>
-               
-            </div>		
-			
-		</div>
-    </div>
+{% block title%}ZBC Admin - Register Person{% endblock %}
+{% block head %}
+	{{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='style/registration.css') }}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block content %}
+        <div class="reg-main-div">
+            <div class="reg-title">
+
+            </div>
+            <div class="reg-main-form">
+                <form action="/admin/register/person" method = "POST">
+                    <p>First Name: <input type = "text" class="input-asphalt" required name = "first-name"/></p>
+                    <p>Last Name: <input type = "text" class="input-asphalt" required name = "last-name"/></p>
+                    <p>CPR Number: <input type = "text" class="input-asphalt" required name = "cpr-number" minlength="10" maxlength="10"/></p>
+                    <p>Email Name: <input type = "text" class="input-asphalt" required name = "email"  title="Invalid Email"/></p>
+                    <p>Role:<select name="role" id="role">
+                        {% for role in roles %}
+                        <option value="{{ role.id }}">{{ role.name }}</option>
+                        {% endfor %}
+                        </select></p>
+                    <p><input type = "submit" value = "submit" /></p>
+                </form>
+            </div>
+            
+        </div>		
+        
    
     
 
     <script type="text/javascript" src="{{ url_for('static',filename='style/registration.js') }}"></script>
-
-</body>
-</html>
+{% endblock %}

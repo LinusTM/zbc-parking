@@ -1,6 +1,7 @@
 from random import getstate
 import uuid
 from dbaccess import *
+import re
 
 def GenerateUUIDs():
     uuids = []
@@ -13,8 +14,20 @@ def GenerateUUIDs():
     
 
     
+def IsEmailValid(email):
+    pattern = re.compile("^([A-Z][0-9]+)+$")
+    return pattern.match(email)
+
+def IsCPRValid(cpr):
+    if(len(cpr) == 10):
+        return True
+    else:
+        return False
+
+
 def GetActiveRoles():
     roles = GetRoles()
+    print(roles)
     return roles
 
 def GetParkingSpots():
@@ -29,8 +42,8 @@ def GetParkingSpots():
 
     return spots
 
-def InsertNewPerson(fname, lname, email, role_id):
-    modified = CreateNewPerson(fname, lname, email, role_id)
+def InsertNewPerson(fname, lname, email, cpr, role_id):
+    modified = CreateNewPerson(fname, lname, email, cpr, role_id)
     return modified
 
 def GetRoleFromPbizz(serial):
