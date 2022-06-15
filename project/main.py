@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 app.register_blueprint(registration)
 
+
 @app.route("/")
 def main_page():
    #GetParkingSpot()
@@ -25,6 +26,7 @@ def main_page():
 def parking_page():
    spots = GetParkingSpots()  
    return render_template("parking.html", spots=spots)
+
 
 @app.route("/admin/register/person", methods=['GET', 'POST'])
 def register_person():
@@ -51,7 +53,10 @@ def register_person():
            return render_template("registerPersonResult.html", success = False, message = "Error inserting new person")
 
     
-
+@app.route("/admin/accounts")
+def accounts():
+   accounts = GetAccounts()
+   return render_template("accounts.html", accounts = accounts)
 
 @app.route("/data/spots")
 def get_spots():
