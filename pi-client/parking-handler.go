@@ -67,7 +67,8 @@ func parkingSpot(spot Spot) {
 }
 
 func parkingHandlerManager() {
-	// Open memory range for GPIO access 
+	// Open memory range for GPIO access on /dev/mem.
+	// Keeps the pin configuration on shutdown too
 	err := rpio.Open()
 	if err != nil {
 		log.Println(err)
@@ -80,8 +81,5 @@ func parkingHandlerManager() {
 	
 	// Start listening on port 8080
 	router.Run(":8080")
-
-	// Close the memory range at program shutdown
-	rpio.Close()
 }
 
