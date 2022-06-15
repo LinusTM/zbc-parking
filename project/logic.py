@@ -1,21 +1,23 @@
-from random import getstate
+import random
 import uuid
 from dbaccess import *
 import re
+from datetime import *
+import pandas as pd
 
-def GenerateUUIDs():
-    uuids = []
-    for i in range(10):
-        new_uuid = uuid.uuid1()
-        string_uuid = str(new_uuid)
-        fixed_uuid = string_uuid[0:4] + string_uuid[19:23]
-        uuids.append(fixed_uuid)
-        print(fixed_uuid)
+
+
+def GenerateUUID():
+    new_uuid = uuid.uuid1()
+    string_uuid = str(new_uuid)        
+    fixed_uuid = '9E18' + string_uuid[19:23]
+    upper_string = fixed_uuid.upper()
+    return upper_string
     
 
     
 def IsEmailValid(email):
-    pattern = re.compile("^([A-Z][0-9]+)+$")
+    pattern = re.compile("^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$")
     return pattern.match(email)
 
 def IsCPRValid(cpr):
@@ -24,6 +26,9 @@ def IsCPRValid(cpr):
     else:
         return False
 
+def GetAccounts():
+    accounts = GetAllAccounts()
+    return accounts
 
 def GetActiveRoles():
     roles = GetRoles()
@@ -56,5 +61,43 @@ def GetParkingSpot():
 def ChangeSpotStatus(spot_number, spot_type, occupied):
     modified = SetSpotStatus(spot_number, spot_type, occupied)
 
+def RegisterEntrance(parkbizz_serial, timestamp):
+    #latest = GetLatestActivity()
+    InsertEntrance(parkbizz_serial, timestamp)
+    return
+
+def RegisterExit(parkbizz_serial, timestamp):
+    # receipt
+    InsertExit(parkbizz_serial, timestamp)
+    return
+
+
+def GenerateBizzActivity(serial):
+    start_date = datetime(2022, 3, 12, 8, 0, 0)
+    for i in range(random.randint(5, 20)): # how many days the activity is going to span
+        daily_activity = random.randint(1, 3) # how many times per day
+        time_now = start_date + timedelta(minutes=random.randint(30, 180))
+        for j in range(daily_activity):
+            RegisterEntrance(serial, time_now)
+            time_now = time_now + timedelta(minutes=random.randint(30, 180))
+            RegisterExit(serial, time_now)
+            time_now = time_now + timedelta(minutes=random.randint(30, 180))
+        start_date = start_date + timedelta(days=1)
+    
+def GenerateParkbizzes():
+    accounts = GetAccounts()
+    for account in accounts:
+        serial = GenerateUUID()
+        expiry = datetime(2025, 6, 15, 8, 0, 0)
+        active = True
+        InsertParkbizz(serial, active, expiry, account.account_number)
+
+def GenerateParkingActivity():
+    bizzes = GetParkingBizzes()
+    for bizz in bizzes:
+        GenerateBizzActivity(bizz.serial_number)
+
+def GetParkingActivity(parkbizz_serial):
+    return GetLatestActivity(parkbizz_serial)
 
 

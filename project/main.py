@@ -9,8 +9,21 @@ app = Flask(__name__)
 
 app.register_blueprint(registration)
 
+
 @app.route("/")
 def main_page():
+   #GetParkingSpot()
+   # ChangeSpotStatus(5, 1, True)
+   # print(GetSpot(1, 5))
+   # InsertNewPerson('carlo', 'ms', 'carletto@gmail.com', 2)
+   #GenerateUUIDs()
+   spots = GetParkingSpots()  
+   return render_template("parking.html", spots=spots)
+   #roles = GetActiveRoles()
+   #return render_template("registerPerson.html", roles = roles)
+
+@app.route("/parking")
+def parking_page():
    #GetParkingSpot()
    # ChangeSpotStatus(5, 1, True)
    # print(GetSpot(1, 5))
@@ -46,7 +59,10 @@ def register_person():
            return render_template("registerPersonResult.html", success = False, message = "Error inserting new person")
 
     
-
+@app.route("/admin/accounts")
+def accounts():
+   accounts = GetAccounts()
+   return render_template("accounts.html", accounts = accounts)
 
 
 @app.route("/data/spots")
