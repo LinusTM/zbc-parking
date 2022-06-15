@@ -10,9 +10,10 @@ import (
     "github.com/peterhellberg/acr122u"
 )
 
+// Entpoint for client
 var endpoint string
 
-func ScannerManager() {
+func scannerManager() {
     // Take endpoint from user with a flag
     flag.StringVar(&endpoint, "endpoint", "", "set the desired endpoint for the client")
     flag.Parse()
