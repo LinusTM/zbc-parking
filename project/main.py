@@ -24,15 +24,9 @@ def main_page():
 
 @app.route("/parking")
 def parking_page():
-   #GetParkingSpot()
-   # ChangeSpotStatus(5, 1, True)
-   # print(GetSpot(1, 5))
-   # InsertNewPerson('carlo', 'ms', 'carletto@gmail.com', 2)
-   #GenerateUUIDs()
    spots = GetParkingSpots()  
    return render_template("parking.html", spots=spots)
-   #roles = GetActiveRoles()
-   #return render_template("registerPerson.html", roles = roles)
+
 
 @app.route("/admin/register/person", methods=['GET', 'POST'])
 def register_person():
@@ -63,7 +57,6 @@ def register_person():
 def accounts():
    accounts = GetAccounts()
    return render_template("accounts.html", accounts = accounts)
-
 
 @app.route("/data/spots")
 def get_spots():

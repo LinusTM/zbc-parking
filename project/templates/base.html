@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='style/base.css') }}" type="text/css" media="screen" />
 
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='style/favIcon/favIcon.ico')}}">
+
     <title>{% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
@@ -17,9 +19,28 @@
             <img src="{{ url_for('static',filename='style/Images/zbc_parking.png') }}">
         </div>
         <nav id="navBar">
-            <a class="nav-item" href="/parking">
-                Parking lot
-            </a>
+            <ul>
+                <li class="nav-item">
+                    <a href="/">Parking lot</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#">Admin</a>
+                    
+                    <ul class="submenu">
+                        <li class="nav-item">
+                            <a href="#">Regiser person</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Register account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Register parkbizz</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
         </nav>
         
         {% endblock %}

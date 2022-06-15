@@ -37,7 +37,7 @@ function tableCreate(table, type){
   function addTableCell(spot, row) {
     var td = row.insertCell();
     td.onclick = function () {
-      tableCellClick(spot);
+      tableCellClick(spot,td);
     }; 
 
          
@@ -49,8 +49,33 @@ function tableCreate(table, type){
     }
   }
 
-  function tableCellClick(spot){
+  function tableCellClick(spot, el){
+    let prevActive = document.querySelector(".active");
+    let sideBox = document.querySelector("#sideBar");
+    if (!sideBox.classList.contains("shown")) {
+      sideBox.classList.add("shown");
+    }
+    if(prevActive != undefined) {
+      prevActive.classList.remove("active");
+    }
+    el.classList.add("active");
+    showParkSpotInfo(spot);
     console.log(spot);
+  }
+
+  function showParkSpotInfo(spot) {
+    let roleBox = document.querySelector("#infoBoxRole h2");
+    let numberBox = document.querySelector("#infoBoxNumber h2");
+    let freeStatus = document.querySelector("#infoBoxTaken h2");
+
+    roleBox.innerHTML = spot.type;
+    numberBox.innerHTML = spot.number;
+    if (spot.occupied) {
+      freeStatus.innerHTML = "Taken";
+    }
+    else {
+      freeStatus.innerHTML = "Free";
+    }
   }
 
   function getRandomCarImage(){
