@@ -19,7 +19,6 @@ class ParkingSpot:
 class Role:
     name: str
     id: int
-    occupied: bool
 
     def __init__(self, name: str, id: int):
         self.name = name
@@ -71,11 +70,11 @@ def GetRoles():
         return roles
 
 
-def CreateNewPerson(fname, lname, email, role_id):
+def CreateNewPerson(fname, lname, email, cpr, role_id):
     try:
         conn = GetConnection()
         cur = conn.cursor()
-        cur.execute('INSERT INTO people (fname, lname, email, role_id) VALUES(%(fname)s, %(lname)s, %(email)s, %(role_id)s)', {'fname': fname, 'lname': lname, 'email': email, 'role_id': role_id})
+        cur.execute('INSERT INTO people (fname, lname, email, cpr_number, role_id) VALUES(%(fname)s, %(lname)s, %(email)s, %(cpr)s, %(role_id)s)', {'fname': fname, 'lname': lname, 'email': email, 'cpr': cpr, 'role_id': role_id})
         modified = cur.rowcount > 0
         conn.commit()
 

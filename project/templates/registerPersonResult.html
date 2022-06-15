@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title%}ZBC Admin - Register Person{% endblock %}
+{% block head %}
+	{{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='style/registration.css') }}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block content %}
+        <div class="reg-main-div">
+            <div class="reg-title">
+
+            </div>
+            <div class="reg-main-form">
+                {% if success %}
+                Success!
+                {% else %}
+                Error registering
+                {% endif %}
+            </div>
+            
+        </div>		
+        
+   
+    
+
+    <script type="text/javascript" src="{{ url_for('static',filename='style/registration.js') }}"></script>
+{% endblock %}
