@@ -71,7 +71,7 @@
 }
 
 .parking-table td:hover {
-    background-color: #85886f;
+    background-color: var(--hover-color);
     border-radius: 3%;
 }
 

@@ -6,6 +6,7 @@
 
 :root {
     --main-background: #4c4e57;
+    --hover-color: #85886f;
     --header-height: 80px;
 }
 
@@ -25,6 +26,7 @@ body {
     max-height: 100%;
 }
 
+/* Navigation menu  */
 header {
     height: var(--header-height);
     background-color: var(--main-background);
@@ -35,22 +37,69 @@ header {
     height: var(--header-height);
     width: 70%;
     padding: 5px;
-    display: flex;
+
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#navBar a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#navBar > ul {
+    list-style-type: none;
+}
+
+#navBar > ul > li {
+    float: left;
 }
 
 .nav-item {
-    font-size: 24px;
-    font-weight: 600;
-    text-decoration: none;
-    color: #000;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
 
+.nav-item a {
     height: 100%;
     padding: 20px;
-    align-items: center;
 }
 
 .nav-item:hover {
-    background-color: #85886f;
+    background-color: var(--hover-color);
+}
+
+.dropdown {
+    position: relative;
+}
+
+.submenu {
+    visibility: hidden;
+
+    /* height: 0; */
+    transform: scaleY(0);
+    transform-origin: top;
+    font-size: 0;
+
+    position: absolute;
+    top: 45px;
+    left: 0;
+    background-color: var(--main-background);
+    list-style-type: none;
+    margin-top: 20px;
+    /* width: 100%; */
+    transition: transform 0.15s;
+    transition-timing-function: linear;
+    /* transition-delay: 0.3; */
+}
+
+.dropdown:hover .submenu,
+.submenu:hover {
+    visibility: visible;
+    transform: scaleY(1);
+    font-size: unset;
 }
 
 
@@ -58,7 +107,7 @@ header {
 #contentWrapper {
     height: 100vh;
     width: 100%;
-    
+
     background: url("../style/Images/background.png"); 
     background-repeat: no-repeat;
     background-position: center;
