@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='style/base.css') }}" type="text/css" media="screen" />
 
-
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='style/favIcon/favIcon.ico')}}">
 
     <title>{% block title %}{% endblock %}</title>
@@ -44,15 +43,7 @@
         </nav>
         {% endblock %}
     </header>
-    <script>
-        // let dropdownEl = document.querySelector(".dropdown");
-        // dropdownEl.addEventListener("mouseenter", function() {
-        //     document.querySelector(".submenu").style.display = "block";
-        // });
-        // dropdownEl.addEventListener("mouseleave", function() {
-        //     document.querySelector(".submenu").style.display = "none";
-        // });
-    </script>
+
     <div id="contentWrapper">
         {% block content %}
 

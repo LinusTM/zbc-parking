@@ -50,7 +50,11 @@ function tableCreate(table, type){
   }
 
   function tableCellClick(spot, el){
-    let prevActive = document.querySelector(".active")
+    let prevActive = document.querySelector(".active");
+    let sideBox = document.querySelector("#sideBar");
+    if (!sideBox.classList.contains("shown")) {
+      sideBox.classList.add("shown");
+    }
     if(prevActive != undefined) {
       prevActive.classList.remove("active");
     }
@@ -60,11 +64,12 @@ function tableCreate(table, type){
   }
 
   function showParkSpotInfo(spot) {
-    let roleBox = document.querySelector("#infoBoxRole");
+    let roleBox = document.querySelector("#infoBoxRole h2");
+    let numberBox = document.querySelector("#infoBoxNumber h2");
+    let freeStatus = document.querySelector("#infoBoxTaken h2");
+
     roleBox.innerHTML = spot.type;
-    let numberBox = document.querySelector("#infoBoxNumber");
     numberBox.innerHTML = spot.number;
-    let freeStatus = document.querySelector("#infoBoxTaken");
     if (spot.occupied) {
       freeStatus.innerHTML = "Taken";
     }

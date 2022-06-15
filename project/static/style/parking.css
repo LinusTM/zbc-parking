@@ -4,7 +4,7 @@
 
 #parkingLot {
     width: 80%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -13,7 +13,7 @@
 }
 
 .parking-group-div {
-    width: 40%;
+    width: 100%;
     text-align: center;
     margin-left:auto;
     margin-right:auto;
@@ -67,7 +67,7 @@
 
 .parking-table td:hover {
     background-color: var(--hover-color);
-    /* border-radius: 3%; */
+    cursor: pointer;
 }
 
 .parking-table td.active {
@@ -82,10 +82,19 @@
     background-color: #b45252;
 }
 
+@media only screen and (min-width: 768px) {
+    .parking-group-div {
+        width: 40%;
+    }
+}
+
 /* Side info box  */
 #sideBar {
     width: 20%;
     background-color: var(--main-background);
+}
+#sideBar:not(.shown) * {
+    display: none;
 }
 
 #parkSpaceInfoBox {
@@ -93,7 +102,7 @@
     margin-left: 20px;
     margin-right: 20px;
     background-color: #35373d;
-    height: 40%;
+    /* height: 40%; */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
     flex-direction: column;
@@ -102,22 +111,30 @@
 #parkSpaceInfoBox > div{
     color: #fff;
     font-size: 24px;
-    text-align: center;
+    text-align: left;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
     padding: 20px;
 }
 
-#infoBoxRole {
-
-}
-
-#infoBoxNumber {
-
-}
-
+/* Role box */
+#infoBoxRole,
+#infoBoxNumber,
 #infoBoxTaken {
+    width: 100%;
+}
+
+#infoBoxNumber h2, 
+#infoBoxTaken h2,
+#infoBoxRole h2 {
 
 }
+#infoBoxRole div,
+#infoBoxNumber div,
+#infoBoxTaken div {
+    color:#9497a7;
+    font-size: 12px;
+}
+
 
