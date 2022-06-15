@@ -45,13 +45,24 @@ func changeLed(number int, occupied bool) {
 }
 
 func parkingSpot(spot Spot) {
-	numbers := map[int]int{12:1, 16:2, 20:3, 21:4, 26:5, 19:6, 13:7, 6:8}
-	
 	// Changing the values for the appropriate parking spot
-	for number := range numbers {
-		if spot.Number == number {
-			changeLed(spot.Number, spot.Occupied)
-		}
+	switch spot.Number {
+		case 1:
+			changeLed(12, spot.Occupied)
+		case 2:
+			changeLed(16, spot.Occupied)
+		case 3:
+			changeLed(20, spot.Occupied)
+		case 4:
+			changeLed(21, spot.Occupied)
+		case 5:
+			changeLed(26, spot.Occupied)
+		case 6:
+			changeLed(19, spot.Occupied)
+		case 7:
+			changeLed(13, spot.Occupied)
+		case 8:
+			changeLed(6, spot.Occupied)
 	}
 }
 
