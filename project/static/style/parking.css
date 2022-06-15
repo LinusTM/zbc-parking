@@ -2,11 +2,6 @@
     display: flex;
 }
 
-#SideBar {
-    width: 20%;
-    background-color: var(--main-background);
-}
-
 #parkingLot {
     width: 80%;
     height: 100vh;
@@ -72,7 +67,11 @@
 
 .parking-table td:hover {
     background-color: var(--hover-color);
-    border-radius: 3%;
+    /* border-radius: 3%; */
+}
+
+.parking-table td.active {
+    background-color: var(--hover-color);
 }
 
 .spot-free {
@@ -83,5 +82,42 @@
     background-color: #b45252;
 }
 
-/*          INPUTS                 */
+/* Side info box  */
+#sideBar {
+    width: 20%;
+    background-color: var(--main-background);
+}
+
+#parkSpaceInfoBox {
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #35373d;
+    height: 40%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+#parkSpaceInfoBox > div{
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding: 20px;
+}
+
+#infoBoxRole {
+
+}
+
+#infoBoxNumber {
+
+}
+
+#infoBoxTaken {
+
+}
 

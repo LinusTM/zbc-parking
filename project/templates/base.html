@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='style/base.css') }}" type="text/css" media="screen" />
 
+
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='style/favIcon/favIcon.ico')}}">
+
     <title>{% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
