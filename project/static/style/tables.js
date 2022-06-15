@@ -36,6 +36,7 @@ function tableCreate(table, type){
 
   function addTableCell(spot, row) {
     var td = row.insertCell();
+    td.classList.add("park-spot");
     td.onclick = function () {
       tableCellClick(spot,td);
     }; 
@@ -49,20 +50,36 @@ function tableCreate(table, type){
     }
   }
 
+  // Action to be performed by clicking on a parking spot
   function tableCellClick(spot, el){
+    // Finds the previous active spot if any
     let prevActive = document.querySelector(".active");
     let sideBox = document.querySelector("#sideBar");
-    if (!sideBox.classList.contains("shown")) {
-      sideBox.classList.add("shown");
-    }
-    if(prevActive != undefined) {
+
+    if (prevActive != undefined) {
       prevActive.classList.remove("active");
     }
+    else {
+      // Adds event listener to hide info box and remove active spot when not clicking on spots
+      document.querySelector("#parkingLot").addEventListener("click", function(e){
+        if (!e.target.classList.contains("park-spot")) {
+          sideBox.classList.remove("shown");
+          document.querySelector(".active").classList.remove("active"); 
+        }
+      })
+    }
+    // Shows the info box if not already shown
+    if (!sideBox.classList.contains("shown")) {
+       sideBox.classList.add("shown");
+    }
+    // Adds active calss to the element to shown whick spot was clicked
     el.classList.add("active");
+    // Display the parking spot info in the info box
     showParkSpotInfo(spot);
     console.log(spot);
   }
 
+  // Displays spot information in the info box
   function showParkSpotInfo(spot) {
     let roleBox = document.querySelector("#infoBoxRole h2");
     let numberBox = document.querySelector("#infoBoxNumber h2");
@@ -70,6 +87,7 @@ function tableCreate(table, type){
 
     roleBox.innerHTML = spot.type;
     numberBox.innerHTML = spot.number;
+    // Checks if the spot is taken
     if (spot.occupied) {
       freeStatus.innerHTML = "Taken";
     }

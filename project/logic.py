@@ -3,7 +3,7 @@ import uuid
 from dbaccess import *
 import re
 from datetime import *
-import pandas as pd
+# import pandas as pd
 
 
 
