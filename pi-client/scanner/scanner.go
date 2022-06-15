@@ -13,7 +13,32 @@ import (
 // Entpoint for client
 var endpoint string
 
-func scannerManager() {
+type User struct {
+    SerialNr []byte `json:"serialNr"`
+    ReaderNr string `json:"readerNr"`
+}
+
+func post(cardInfo []byte) {
+    // Sends POST request to REST api
+    resp, err := http.Post(
+        endpoint, 
+        "application/json; charset=utf-8", 
+        bytes.NewBuffer(cardInfo),
+    )
+
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+
+    resp.Body.Close()
+
+    if resp.StatusCode != 201 {
+        fmt.Println("Error! Try again or contact appropriate staff.") 
+    }
+}
+
+func main() {
     // Take endpoint from user with a flag
     flag.StringVar(&endpoint, "endpoint", "", "set the desired endpoint for the client")
     flag.Parse()
@@ -40,27 +65,3 @@ func scannerManager() {
     })
 }
 
-type User struct {
-    SerialNr []byte `json:"serialNr"`
-    ReaderNr string `json:"readerNr"`
-}
-
-func post(cardInfo []byte) {
-    // Sends POST request to REST api
-    resp, err := http.Post(
-        endpoint, 
-        "application/json; charset=utf-8", 
-        bytes.NewBuffer(cardInfo),
-    )
-
-    if err != nil {
-        fmt.Println(err)
-        return
-    }
-
-    resp.Body.Close()
-
-    if resp.StatusCode != 201 {
-        fmt.Println("Error! Try again or contact appropriate staff.") 
-    }
-}

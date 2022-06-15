@@ -66,7 +66,7 @@ func parkingSpot(spot Spot) {
 	}
 }
 
-func parkingHandlerManager() {
+func main() {
 	// Open memory range for GPIO access on /dev/mem.
 	// Keeps the pin configuration on shutdown too
 	err := rpio.Open()
