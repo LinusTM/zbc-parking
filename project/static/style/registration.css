@@ -57,7 +57,9 @@ input[type=text] {
   .reg-table tr:nth-child(even){background-color: #f2f2f2;}
   .reg-table tr:nth-child(odd){background-color: #b8b2b2;}
   
-  .reg-table tr:hover {background-color: #ddd;}
+  .reg-table tr:hover {
+    background-color: var(--hover-color);
+  }
   
   .reg-table th {
     padding-top: 12px;

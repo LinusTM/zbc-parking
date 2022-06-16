@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 from registration import registration
 from logic import *
 import json
@@ -63,6 +63,16 @@ def get_spots():
    spots = GetParkingSpots()
    spotsj = json.dumps(list(spots))
    return spotsj
+
+# Takes post request for changing occupied status from parking spots
+@app.route("/data/api", methods=['POST'])
+def post_park():
+   record = json.loads(request.data)
+   spot_number = record['spot_number']
+   spot_type = record['spot_type']
+   spot_occupied = record['occupied']
+   ChangeSpotStatus(spot_number, spot_type, spot_occupied)
+   return jsonify(record)
 
 if __name__ == "__main__":
 	app.run(debug=True)
