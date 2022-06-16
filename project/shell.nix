@@ -15,6 +15,7 @@ in mkShell {
 		python39Packages.psycopg2
 		python39Packages.flask
 		python39Packages.wtforms
+		python39Packages.pandas
 	];
 
 	shellHook = ''
