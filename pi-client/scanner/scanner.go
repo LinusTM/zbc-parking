@@ -52,7 +52,7 @@ func main() {
     // Marshal card UID and nfc scanner number
     ctx.ServeFunc(func(card acr122u.Card) {
         cardInfo, err := json.Marshal(User{
-            SerialNr: card.UID(),
+            SerialNr: string(card.UID()),
             ReaderNr: card.Reader(),
         })
 
