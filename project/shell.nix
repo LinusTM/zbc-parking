@@ -16,6 +16,8 @@ in mkShell {
 		python39Packages.flask
 		python39Packages.wtforms
 		python39Packages.pandas
+		python39Packages.json5
+		python39Packages.dataclasses-json
 	];
 
 	shellHook = ''
