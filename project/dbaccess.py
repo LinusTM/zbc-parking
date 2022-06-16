@@ -103,15 +103,15 @@ class Receipt:
 
 def GetConnection():
     try:
-        # conn = psycopg2.connect("host=localhost dbname=parking_lot user=postgres password=admin")
+        conn = psycopg2.connect("host=localhost dbname=zbcparking user=postgres password=password")
 
-        conn = psycopg2.connect(
-            host="10.108.149.16",
-            database="parking_lot",
-            user="root",
-            password="root",
-            port="5432"
-        )
+        # conn = psycopg2.connect(
+        #     host="10.108.149.16",
+        #     database="parking_lot",
+        #     user="root",
+        #     password="root",
+        #     port="5432"
+        # )
         
         if conn is not None:
             return conn

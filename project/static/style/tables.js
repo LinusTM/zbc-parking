@@ -5,6 +5,7 @@ const maxSpots = 8;
 var table_guests = document.getElementById('parking-guests');
 var table_staff = document.getElementById('parking-staff');
 var table_students = document.getElementById('parking-students');
+var occupied_check = document.getElementById('check_occupied');
 
 let checking = false;
 
@@ -15,6 +16,36 @@ var parking_spots = JSON.parse(spots);
 tableCreate(table_staff, 'Staff');
 tableCreate(table_students, 'Student');
 tableCreate(table_guests, 'Guest');
+
+occupied_check.addEventListener('change', function() {
+
+  sendInfo = {
+    type: 'Guest',
+    number: 2,
+    occupied: true
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "10.108.149.14:8080/pin",
+    dataType: "json",
+    success: function (msg) {
+        if (msg) {
+
+      
+        } else {
+
+        }
+    },
+    data: sendInfo
+});
+
+  if (this.checked) {
+    console.log("Checkbox is checked..");
+  } else {
+    console.log("Checkbox is not checked..");
+  }
+});
 
 function tableCreate(table, type){
 
@@ -94,10 +125,10 @@ let freeStatus = document.querySelector("#infoBoxTaken h2");
     numberBox.innerHTML = spot.number;
     // Checks if the spot is taken
     if (spot.occupied) {
-      freeStatus.innerHTML = "Taken";
+      occupied_check.checked = true;
     }
     else {
-      freeStatus.innerHTML = "Free";
+      occupied_check.checked = false;
     }
   }
 
