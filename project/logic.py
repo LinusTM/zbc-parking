@@ -134,7 +134,6 @@ def GenerateParkingActivity():
 def GetParkingActivity(parkbizz_serial):
     return GetLatestActivity(parkbizz_serial)
 
-<<<<<<< Updated upstream
 def FlipOccupiedStatus(type, number):
     FlipStatus(type, number)
 
@@ -146,9 +145,8 @@ def DataclassListToJson(list):
 
 def UpdateSpotStatus(spot_type, spot_number, occupied):
     UpdateSpot(spot_type, spot_number, occupied)
-=======
+
 def GetReceipts(account_number):
     return GetReceiptsFromSerial(account_number)
->>>>>>> Stashed changes
 
 

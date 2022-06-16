@@ -37,15 +37,15 @@
                     </td>
                     <td class="actions">
                         {% for acc in person.accounts %}
-                        <button class="button-table" title="Show account {{ acc.account_number }}"
+                        <button class="button-table button" title="Show account {{ acc.account_number }}"
                             onclick="clickAccount('{{ acc.account_number }}', '{{ person.fname }} {{ person.lname }}', '{{ person.cpr_number }}' )">ACC</button>
                         {% endfor %}
                     </td>
                 </tr>
                 {% endfor %}
             </table>
+            <a href="/registration" class="button-page button">Add person</a>
         </div>
-        <button class="button-page">Add person</button>
     </div>
     <div id="sideBar" class="">
         <div id="sideContent">
@@ -79,23 +79,28 @@
 
                 <div id="infoBoxBizzSerial" class="info">
                     <div>Serial</div>
-                    <h2></h2>
+                    <div class="bizz-serial"></div>
                 </div>
 
                 <div id="infoBoxExpiryDate" class="info">
                     <div>ExpiryDate</div>
-                    <h2></h2>
+                    <div class="bizz-expiry-date"></div>
                 </div>
             </div>
 
             <div class="table-div">
                     <table id="receiptsTable">
-                        <tr>
-                            <th>id</th>
-                            <th>entrance</th>
-                            <th>exit</th>
-                            <th>total</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Entrance</th>
+                                <th>Exit</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
                     </table>
                 </div>
         </div>

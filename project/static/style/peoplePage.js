@@ -14,23 +14,32 @@ function findAccount(accountNumber) {
     return matchedAccount;
 }
 
-
+function getDateOnly(dateString) {
+    return dateString.substring(5, 16);
+}
 
 function displayAccountInfo(account, name, cpr) {
     document.querySelector("#infoBoxName h2").innerHTML = name;
     document.querySelector("#infoBoxCpr h2").innerHTML = cpr;
     document.querySelector("#infoBoxAccountNr h2").innerHTML = account.account_number;
     document.querySelector("#infoBoxBalance h2").innerHTML = account.balance;
-    document.querySelector("#infoBoxBizzSerial h2").innerHTML = account.parkbizzes[0].serial_number;
-    document.querySelector("#infoBoxExpiryDate h2").innerHTML =  account.parkbizzes[0].expiry_date;
+    console.log(account.parkbizzes);
+    account.parkbizzes.forEach(function(bizz) {
+        document.querySelector("#infoBoxBizzSerial .bizz-serial").innerHTML += "<div><h2>" + bizz.serial_number + "</h2></div>";
+        document.querySelector("#infoBoxExpiryDate .bizz-expiry-date").innerHTML += "<div><h2>" + getDateOnly(bizz.expiry_date) + "</h2></div>";
+    })
 }
 
 function displayReceipts(receipts) {
-    let table = document.querySelector("#receiptsTable");
+    let table = document.querySelector("#receiptsTable tbody");
+    table.innerHTML = '';
     receipts.forEach(function(receipt) {
         let row = table.insertRow()
+        row.insertCell().innerHTML = receipt.receipt_id;
+        row.insertCell().innerHTML = getDateOnly(receipt.entrance_time);
+        row.insertCell().innerHTML = getDateOnly(receipt.exit_time);
+        row.insertCell().innerHTML = receipt.total;
     })
-    console.log(receipts);
 }
 
 function getReceipts(account_number) {
