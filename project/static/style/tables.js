@@ -107,10 +107,11 @@ let freeStatus = document.querySelector("#infoBoxTaken h2");
   }
 
 
-// Cchecking for updates between database and existing spots
+// Checking for updates between database and existing spots
 let newSpots;
 
 function CheckSpots() {
+	// GET updated parking spots
 	$.ajax({
 		url: "/data/spots",
 		type: "GET",
@@ -120,7 +121,10 @@ function CheckSpots() {
 		}
 	});
 
+	// Loop through every spot, checking if its occupied.
 	for(let i = 0; i < parking_spots.length; i++) {
+		// If changes has occured between old and newly fetched,
+		// set current spot to new spot.
 		if(parking_spots[i].occupied != newSpots[i].occupied) {
 			parking_spots[i].occupied = newSpots[i].occupied;
 			updateSpot(parking_spots[i].type, parking_spots[i].number, parking_spots[i].occupied);
@@ -129,6 +133,7 @@ function CheckSpots() {
 }
 
 function updateSpot(type, number, occupied) {
+	// Set targetTable to the value of HTML id's
 	let targetTable;
 	switch(type) {
 		case "Guest":
@@ -141,22 +146,27 @@ function updateSpot(type, number, occupied) {
 			targetTable = table_staff;
       break;
 	}
-	
+
 	let rowNumber;
 	let columnNumber;
 
+	// Figure out which row it is, as rows
+	// have either even or odd spot numbers
 	rowNumber = number % 2 == 0 ? 1 : 0;
-	
+
+	// Set columnNumber depending if its even or odd
 	if(number % 2 == 0) {
 		columnNumber = number / 2 - 1;
 	} else {
 		columnNumber = Math.floor(number / 2);
 	}
 	
+	// Update the tables
 	editSpotStatus(targetTable.rows[rowNumber].cells[columnNumber], occupied)
-
 }
 
+// Run the function ever .5 seconds
 setInterval(function(){
 	CheckSpots();
-}, 1000)
+}, 500)
+
