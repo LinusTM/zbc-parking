@@ -117,13 +117,6 @@ def GenerateParkbizzes():
         active = True
         InsertParkbizz(serial, active, expiry, account.account_number)
     
-def GenerateParkbizzes():
-    accounts = GetAccounts()
-    for account in accounts:
-        serial = GenerateUUID()
-        expiry = datetime(2025, 6, 15, 8, 0, 0)
-        active = True
-        InsertParkbizz(serial, active, expiry, account.account_number)
 
 def GenerateParkingActivity():
     bizzes = GetParkingBizzes()
