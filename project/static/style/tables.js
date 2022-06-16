@@ -63,18 +63,18 @@ function tableCreate(table, type){
     console.log(spot);
   }
 
-  function showParkSpotInfo(spot) {
-    let roleBox = document.querySelector("#infoBoxRole h2");
-    let numberBox = document.querySelector("#infoBoxNumber h2");
-    let freeStatus = document.querySelector("#infoBoxTaken h2");
+let roleBox = document.querySelector("#infoBoxRole h2");
+let numberBox = document.querySelector("#infoBoxNumber h2");
+let freeStatus = document.querySelector("#infoBoxTaken h2");
 
+  function showParkSpotInfo(spot) {
     roleBox.innerHTML = spot.type;
     numberBox.innerHTML = spot.number;
     if (spot.occupied) {
-      freeStatus.innerHTML = "Taken";
+      freeStatus.data = "Taken";
     }
     else {
-      freeStatus.innerHTML = "Free";
+      freeStatus.data = "Free";
     }
   }
 
