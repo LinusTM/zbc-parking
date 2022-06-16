@@ -79,11 +79,9 @@ def post_park():
 
 @app.route("/data/receipts", methods=['GET'])
 def get_receipts():
-   record = json.loads(request.data)
-   bizz_serial = record['serial']
-   activity = GetParkingActivity(bizz_serial)
-   print(activity)
-   return jsonify(activity)
+   bizz_serial = request.args.get('account_number')
+   receipts = GetReceipts(bizz_serial)
+   return jsonify(receipts)
 
 
 @app.route("/model/scanner")

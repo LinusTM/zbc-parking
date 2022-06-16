@@ -83,6 +83,24 @@ class Person:
         self.role = role
         self.accounts = accounts
 
+@dataclass
+class Receipt:
+    receipt_id: int
+    account_number: int
+    hourly_fee: float
+    entrance_time: datetime
+    exit_time: datetime
+    payment_time: datetime
+    total: float
+    def __init__(self, receipt_id: int, account_number: int, hourly_fee: float, entrance_time: datetime, exit_time: datetime, payment_time: datetime, total: float):
+        self.receipt_id = receipt_id
+        self.account_number = account_number
+        self.hourly_fee = hourly_fee
+        self.entrance_time = entrance_time
+        self.exit_time = exit_time
+        self.payment_time = payment_time
+        self.total = total
+
 def GetConnection():
     try:
         # conn = psycopg2.connect("host=localhost dbname=parking_lot user=postgres password=admin")
@@ -130,7 +148,6 @@ def GetAllPeople():
                     bizz = Parkbizz(bizzRow[0], bizzRow[1], bizzRow[2], bizzRow[3])  
                     bizzes.append(bizz)
                 account = Account(accRow[0], accRow[1], accRow[2], accRow[3], bizzes)  
-                print(account)
                 accounts.append(account)
 
             person = Person(row[0], row[1], row[2], row[3], row[4], accounts)  
@@ -383,6 +400,28 @@ def GetLatestExit(parkbizz_serial):
         if conn is not None:
             conn.close()
 
+def GetReceiptsFromSerial(account_number):
+    try:
+        conn = GetConnection()
+        cur = conn.cursor()
+
+        cur.execute('SELECT * FROM account_receipts WHERE account_receipts.account_number = %(acc_num)s ORDER BY entrance_time DESC', {"acc_num": account_number})
+        rows = cur.fetchall()
+
+        receipts = []
+
+        for row in rows:
+            receipt = Receipt(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
+            receipts.append(receipt)
+        
+    except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+    finally:
+        cur.close()
+        if conn is not None:
+            conn.close()
+        return receipts
+    
 
 def GetSpot(type, number):
     try:
