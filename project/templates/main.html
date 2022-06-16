@@ -25,12 +25,28 @@
 			<h1>{{spots}}</h1>
 		</div>
 
-		<div id="free">
-			<h1>free</h1>
+		<div id="students">
+			<h2 class="map-header">students</h2>
+			<div class="map">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
 		</div>
 
-		<div id="free-worker">
-			<h1>free-worker</h1>
+		<div id="guests">
+			<h2 class="map-header">guests</h2>
+			<div class="map">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
 		</div>
 		{% for spot in spots %}
 		<h1>{{ spot.type }}</h1>

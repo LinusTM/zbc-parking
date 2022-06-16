@@ -1,45 +1,57 @@
+body {
+	background-color: #1d1d2c;
+}
+
 .container {
-	width: 100%;
-	height: 100%;
+	margin: 1em;
+	width: 30em;
+	gap: 1em;
 	display: grid;
-	justify-items: stretch;
-	justify-content: center;
-	grid-template-columns: 50% 50%;
-	grid-template-rows: auto;
 	grid-template-areas:
-		"map free"
-		"map free-worker"
-		"map free-guest";
+		"staff students"
+		"guests guests";
 }
 
-#map {
+.container > div {
+	margin: 2em;
+	width: 20em;
+	border-radius: 10px;
+	padding: 1em;
+	background-color: #373833;
+}
+
+.map {
 	grid-area: map;
-	margin: 2em 4em;
-	background-color: green;
-	box-shadow: 4px 3px 4px darkgray;
-	border-radius: 10px;
+	width: 20em;
+
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1em;
 }
 
-#free {
-	grid-area: free;
-	margin: 2em 4em;
-	background-color: blue;
-	box-shadow: 4px 3px 4px darkgray;
-	border-radius: 10px;
+.map > div {
+	height: 10em;
+	transition: 0.3s;
+	border-radius: 2px;
+	background-color: lightgray;
 }
 
-#free-worker {
-	grid-area: free-worker;
-	margin: 2em 4em;
-	background-color: yellow;
-	box-shadow: 4px 3px 4px darkgray;
-	border-radius: 10px;
+.map > div:hover {
+	background-color: #373833;
 }
 
-#free-guest {
-	grid-area: free-guest;
-	margin: 2em 4em;
-	background-color: darkgreen;
-	box-shadow: 4px 3px 4px darkgray;
-	border-radius: 10px;
+.map-header {
+	color: #E8EAE3;
+}
+
+#staff {
+	grid-area: staff;
+}
+
+#students {
+	grid-area: students;
+}
+
+#guests {
+	grid-area: guests;
 }
