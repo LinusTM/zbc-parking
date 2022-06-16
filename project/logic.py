@@ -139,6 +139,7 @@ def DataclassListToJson(list):
 def UpdateSpotStatus(spot_type, spot_number, occupied):
     UpdateSpot(spot_type, spot_number, occupied)
 
+# Return receipts related to account from database
 def GetReceipts(account_number):
     return GetReceiptsFromSerial(account_number)
 

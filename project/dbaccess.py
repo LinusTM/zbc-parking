@@ -49,6 +49,7 @@ class Role:
         self.name = name
         self.id = id
 
+# Reprensent an account connected to a person and can contain multiple Parkbizz instances  
 @dataclass
 class Account:
     account_number: int
@@ -66,6 +67,7 @@ class Account:
         self.person_cpr = person_cpr
         self.parkbizzes = parkbizzes
 
+# Represent a person can contain multiple Account instances
 @dataclass
 class Person:
     cpr_number: str
@@ -83,6 +85,7 @@ class Person:
         self.role = role
         self.accounts = accounts
 
+# Represents a receipt holding info for entering and exiting parking lot and the price for the time parkedr
 @dataclass
 class Receipt:
     receipt_id: int
@@ -121,6 +124,7 @@ def GetConnection():
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
+# Recieves all people from database with related accounts and parkbizz connected.
 def GetAllPeople():
     try:
         conn = GetConnection()
@@ -399,7 +403,7 @@ def GetLatestExit(parkbizz_serial):
         cur.close()
         if conn is not None:
             conn.close()
-
+# Recieves receipt related to account number 
 def GetReceiptsFromSerial(account_number):
     try:
         conn = GetConnection()

@@ -93,6 +93,7 @@ function editSpotStatus(cell, occupied) {
     let prevActive = document.querySelector(".active");
     let sideBox = document.querySelector("#sideBar");
 
+    // if any previous active spot is remove
     if (prevActive != undefined) {
       prevActive.classList.remove("active");
     }

@@ -1,7 +1,7 @@
 // Transform the spots JSON variable into an array
 let people = JSON.parse(peopleJson);
 
-
+// Matches the account clicked with account list
 function findAccount(accountNumber) {
     let matchedAccount = undefined;
     people.forEach(function(person) {
@@ -14,10 +14,12 @@ function findAccount(accountNumber) {
     return matchedAccount;
 }
 
+// formats PostgreSQL datetime and returns only the date
 function getDateOnly(dateString) {
     return dateString.substring(5, 16);
 }
 
+// Display account and parkbizz info in the info box
 function displayAccountInfo(account, name, cpr) {
     document.querySelector("#infoBoxName h2").innerHTML = name;
     document.querySelector("#infoBoxCpr h2").innerHTML = cpr;
@@ -30,6 +32,7 @@ function displayAccountInfo(account, name, cpr) {
     })
 }
 
+// Populates the receipts table with receipts related to the account
 function displayReceipts(receipts) {
     let table = document.querySelector("#receiptsTable tbody");
     table.innerHTML = '';
@@ -42,6 +45,7 @@ function displayReceipts(receipts) {
     })
 }
 
+// Receives reciepts related to account
 function getReceipts(account_number) {
     let receipts;
     $.ajax({
@@ -61,24 +65,24 @@ function getReceipts(account_number) {
 
 
 
- // Action to be performed by clicking on a parking spot
+ // Action to be performed by clicking on a account
  function clickAccount(accountNumber, name, cpr){
     let account = findAccount(accountNumber);
+
     if (account != undefined) {
         displayAccountInfo(account, name, cpr);
         let receipts = getReceipts(accountNumber);
     }
     else {
-        console.log("Account not matched")
+        console.log("No matching account")
     }
 
-    // Finds the previous active spot if any
     let sideBox = document.querySelector("#sideBar");
 
     // Shows the info box if not already shown
     if (sideBox.classList == '') {
        sideBox.classList.add("shown");
-       // Adds event listener to hide info box and remove active spot when not clicking on spots
+       // Adds event listener to hide info box and hides the info box when clicking outside the
       document.querySelector("#tableContainer").addEventListener("click", function(e){
         if (!e.target.classList.contains("button-table") && sideBox.classList != '') {
           sideBox.classList.remove("shown");

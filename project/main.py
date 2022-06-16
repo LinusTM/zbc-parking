@@ -77,10 +77,11 @@ def post_park():
    ChangeSpotStatus(spot_number, spot_type, spot_occupied)
    return jsonify(record)
 
+# Receives receipts related to account
 @app.route("/data/receipts", methods=['GET'])
 def get_receipts():
-   bizz_serial = request.args.get('account_number')
-   receipts = GetReceipts(bizz_serial)
+   account_number = request.args.get('account_number')
+   receipts = GetReceipts(account_number)
    return jsonify(receipts)
 
 
