@@ -52,6 +52,10 @@ def register_person():
       else:
            return render_template("registerPersonResult.html", success = False, message = "Error inserting new person")
 
+@app.route("/admin/people")
+def people():
+   people = GetAllPeople()
+   return render_template("people.html", people = people)
     
 @app.route("/admin/accounts")
 def accounts():
@@ -73,6 +77,14 @@ def post_park():
    spot_occupied = record['occupied']
    ChangeSpotStatus(spot_number, spot_type, spot_occupied)
    return jsonify(record)
+
+@app.route("/data/receipts", methods=['GET'])
+def get_receipts():
+   record = json.loads(request.data)
+   bizz_serial = record['serial']
+   activity = GetParkingActivity(bizz_serial)
+   print(activity)
+   return jsonify(activity)
 
 if __name__ == "__main__":
 	app.run(debug=True)

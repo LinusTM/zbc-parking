@@ -8,6 +8,8 @@ p {
 
 #tableContainer {
   flex-grow: 1;
+  border-top: 3px solid #9497a7;
+  border-right: 3px solid #9497a7;
 }
 
 #sideBar {
@@ -23,9 +25,9 @@ p {
 }
 
 .table-div{
-	max-height: 600px;
+  max-height: 600px;
   max-width: 70vw;
-	overflow: auto;
+  overflow: auto;
   margin-left: auto;
   margin-right: auto;
   margin-top: 80px;
@@ -58,6 +60,10 @@ p {
   color: white;
 }
 
+.actions {
+    display: flex;
+}
+
 .button-table {
   background-color: #4CAF50; /* Green */
   border: none;
@@ -67,6 +73,8 @@ p {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 .button-page {
@@ -80,4 +88,58 @@ p {
   margin-left: 45%;
   margin-top: 30px;
   font-size: 16px;
+}
+
+
+/* Side info box  */
+#sideBar {
+    width: 40%;
+    transform: scaleX(1);
+    background-color: var(--main-background);
+    transition: transform 0.3s, width 0.3s;
+    transition-timing-function: ease;
+    transform-origin: right;
+}
+#sideBar:not(.shown) {
+    transform: scaleX(0);
+    width: 0%;
+}
+
+#sideContent {
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: var(--infoBox-background);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#sideContent > div:not(.table-div){
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+#sideContent > div > div{
+    text-align: left;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+
+}
+
+.info {
+    width: 100%;
+    color:#9497a7;
+    font-size: 12px;
+}
+.info h2{
+    color:#fff;
+    font-size: 24px;
+}
+
+#sideContent .receiptTable {
+
 }

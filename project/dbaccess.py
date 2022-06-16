@@ -55,16 +55,33 @@ class Account:
     balance: float
     active: bool
     person_cpr: str
-    owner_fname: str
-    owner_lname: str
+    parkbizzes: list[Parkbizz]
+    # owner_fname: str
+    # owner_lname: str
 
-    def __init__(self, account_number: int, balance: float, active: bool, person_cpr: str, owner_fname: str, owner_lname: str):
+    def __init__(self, account_number: int, balance: float, active: bool, person_cpr: str, parkbizzes: list[Parkbizz]):
         self.account_number = account_number
         self.balance = balance
         self.active = active
         self.person_cpr = person_cpr
-        self.owner_fname = owner_fname
-        self.owner_lname = owner_lname
+        self.parkbizzes = parkbizzes
+
+@dataclass
+class Person:
+    cpr_number: str
+    fname: str
+    lname: str
+    email: str
+    role: str
+    accounts: list[Account]
+
+    def __init__(self, cpr_number: int, fname: str, lname: str, email : str, role : str, accounts : list[Account]):
+        self.cpr_number = cpr_number
+        self.fname = fname
+        self.lname = lname
+        self.email = email
+        self.role = role
+        self.accounts = accounts
 
 def GetConnection():
     try:
@@ -86,6 +103,48 @@ def GetConnection():
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
+def GetAllPeople():
+    try:
+        conn = GetConnection()
+        
+        # create a cursor
+        cur = conn.cursor()
+        
+        # execute a statement
+        cur.execute("SELECT people.cpr_number, people.fname, people.lname, people.email, (SELECT roles.role_name FROM roles WHERE people.role_id = roles.role_id) FROM people")
+        people = []
+
+        peopleRows = cur.fetchall()
+
+        for row in peopleRows:
+            cur.execute("SELECT accounts.account_number, accounts.balance, accounts.active, accounts.person_cpr FROM accounts WHERE accounts.active = TRUE AND accounts.person_cpr = %(cpr)s", {"cpr" : row[0]})
+            accounts = []
+
+            accountRows = cur.fetchall()
+            for accRow in accountRows:
+                cur.execute("SELECT * FROM parkbizz WHERE parkbizz.active = TRUE AND parkbizz.account_number = %(acc_num)s", {"acc_num" : accRow[0]})
+                bizzes = []
+
+                bizzRows = cur.fetchall()
+                for bizzRow in bizzRows:
+                    bizz = Parkbizz(bizzRow[0], bizzRow[1], bizzRow[2], bizzRow[3])  
+                    bizzes.append(bizz)
+                account = Account(accRow[0], accRow[1], accRow[2], accRow[3], bizzes)  
+                print(account)
+                accounts.append(account)
+
+            person = Person(row[0], row[1], row[2], row[3], row[4], accounts)  
+            people.append(person)
+            
+        
+    
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        cur.close()
+        if conn is not None:
+            conn.close()
+        return people
 
 def GetAllAccounts():
     try:
@@ -101,8 +160,10 @@ def GetAllAccounts():
         rows = cur.fetchall()
 
         for row in rows:
-            account = Account(row[0], row[1], row[2], row[3], row[4], row[5])  
+            
+            account = Account(row[0], row[1], row[2], row[3])  
             accounts.append(account)
+
     
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)

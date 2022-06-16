@@ -115,6 +115,9 @@ header {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
 
+#contentWrapper > div {
+    height: 100%;
 }
 

@@ -62,7 +62,7 @@ function tableCreate(table, type){
     else {
       // Adds event listener to hide info box and remove active spot when not clicking on spots
       document.querySelector("#parkingLot").addEventListener("click", function(e){
-        if (!e.target.classList.contains("park-spot")) {
+        if (!e.target.classList.contains("park-spot") && sideBox.classList != '') {
           sideBox.classList.remove("shown");
           document.querySelector(".active").classList.remove("active"); 
         }
@@ -88,10 +88,10 @@ let freeStatus = document.querySelector("#infoBoxTaken h2");
     numberBox.innerHTML = spot.number;
     // Checks if the spot is taken
     if (spot.occupied) {
-      freeStatus.data = "Taken";
+      freeStatus.innerHTML = "Taken";
     }
     else {
-      freeStatus.data = "Free";
+      freeStatus.innerHTML = "Free";
     }
   }
 

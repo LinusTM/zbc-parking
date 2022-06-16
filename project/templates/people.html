@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title%}ZBC Admin - Register Person{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static',filename='style/people.css') }}" type="text/css" media="screen" />
+<script>
+    let peopleJson = '{{ people | tojson }}';
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="pageContainer">
+    <div id="tableContainer">
+        <div class="table-div" id="table-accounts">
+            <table>
+                <tr>
+                    <th>CPR</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+                {% for person in people %}
+                <tr>
+                    <td>
+                        {{ person.cpr_number }}
+                    </td>
+                    <td>
+                        {{ person.fname }} {{ person.lname }}
+                    </td>
+                    <td>
+                        {{ person.email }}
+                    </td>
+                    <td>
+                        {{ person.role }}
+                    </td>
+                    <td class="actions">
+                        {% for acc in person.accounts %}
+                        <button class="button-table" title="Show account {{ acc.account_number }}"
+                            onclick="clickAccount('{{ acc.account_number }}', '{{ person.fname }} {{ person.lname }}', '{{ person.cpr_number }}' )">ACC</button>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <button class="button-page">Add person</button>
+    </div>
+    <div id="sideBar" class="">
+        <div id="sideContent">
+            <div>
+
+                <div id="infoBoxName" class="info">
+                    <div>Owner name</div>
+                    <h2></h2>
+                </div>
+
+                <div id="infoBoxCpr" class="info">
+                    <div>CPR</div>
+                    <h2></h2>
+                </div>
+            </div>
+
+            <div>
+
+                <div id="infoBoxAccountNr" class="info">
+                    <div>Account number</div>
+                    <h2></h2>
+                </div>
+
+                <div id="infoBoxBalance" class="info">
+                    <div>Balance</div>
+                    <h2></h2>
+                </div>
+            </div>
+
+            <div>
+
+                <div id="infoBoxBizzSerial" class="info">
+                    <div>Serial</div>
+                    <h2></h2>
+                </div>
+
+                <div id="infoBoxExpiryDate" class="info">
+                    <div>ExpiryDate</div>
+                    <h2></h2>
+                </div>
+            </div>
+
+            <div class="table-div">
+                    <table>
+                        <tr>
+                            <th>id</th>
+                            <th>entrance</th>
+                            <th>exit</th>
+                            <th>total</th>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+<script type="text/javascript" src="{{ url_for('static',filename='style/peoplePage.js') }}"></script>
+{% endblock %}
