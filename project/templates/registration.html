@@ -1,57 +1,49 @@
-<!doctype html>
-<html class="no-js" lang="">
+{% extends "base.html" %}
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>ZBC Parking - Registrer</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block title %} ZBC - Registration {% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static',filename='style/registration.css') }}" type="text/css"
+	media="screen" />
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+{% endblock %}
 
-	<link rel="stylesheet" href="{{ url_for('static',filename='style/registration.css') }}" type="text/css" media="screen" />
-	<!-- Place favicon.ico in the root directory -->
-	
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
-</head>
+{% block content %}
+<div id="registrationGroup">
+	<div id="title">
+		<h1>Registrer</h1>
+	</div>
 
-<body>
-	<div id="registrationGroup">
-		<div id="title">
-			<h1>Registrer</h1>
+	<form method="POST" name="person">
+		<div id="fname">
+			<label for="fname">Fornavn</label><br>
+			<input type="text" name="fname"><br><br>
 		</div>
 
-		<form method="POST" name="person">
-			<div id="fname">
-				<label for="fname">Fornavn</label><br>
-				<input type="text" name="fname"><br><br>
-			</div>
+		<div id="lname">
+			<label for="lname">Efternavn</label><br>
+			<input type="text" name="lname"><br><br>
+		</div>
 
-			<div id="lname">
-				<label for="lname">Efternavn</label><br>
-				<input type="text" name="lname"><br><br>
-			</div>
+		<div id="email">
+			<label for="email">E-mail</label><br>
+			<input type="text" name="email"><br><br>
+		</div>
 
-			<div id="email">
-				<label for="email">E-mail</label><br>
-				<input type="text" name="email"><br><br>
-			</div>
+		<div id="role">
+			<label for="role">Rolle</label><br>
+			<select name="role">
+				<option value="1">Gæst</option>
+				<option value="2">Medarbejder</option>
+				<option value="3">Elev</option>
+			</select><br><br>
+		</div>
 
-			<div id="role">
-				<label for="role">Rolle</label><br>
-				<select name="role">
-					<option value="1">Gæst</option>
-					<option value="2">Medarbejder</option>
-					<option value="3">Elev</option>
-				</select><br><br>
-			</div>
+		<div id="submit">
+			<button type="submit" value=Register>Tilføj bruger</button>
+		</div>
+	</form>
+</div>
 
-			<div id="submit">
-					<button type="submit" value=Register>Tilføj bruger</button> 
-			</div>
-		</form>
-	</div>
-</body>
-
-</html>
+<script type="text/javascript" src="{{ url_for('static',filename='style/registration.js') }}"></script>
+{% endblock %}

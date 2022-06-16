@@ -14,8 +14,8 @@ import (
 var endpoint string
 
 type User struct {
-    SerialNr []byte `json:"serialNr"`
-    ReaderNr string `json:"readerNr"`
+    SerialNr string `json:"serialNr"`
+    SpotNr string `json:"spotNr"`
 }
 
 func post(cardInfo []byte) {
@@ -52,8 +52,8 @@ func main() {
     // Marshal card UID and nfc scanner number
     ctx.ServeFunc(func(card acr122u.Card) {
         cardInfo, err := json.Marshal(User{
-            SerialNr: card.UID(),
-            ReaderNr: card.Reader(),
+            SerialNr: string(card.UID()),
+            SpotNr: card.Reader(),
         })
 
         if err != nil {
