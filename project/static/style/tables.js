@@ -11,6 +11,7 @@ let checking = false;
 // Transform the spots JSON variable into an array
 var parking_spots = JSON.parse(spots);
 
+
 tableCreate(table_staff, 'Staff');
 tableCreate(table_students, 'Student');
 tableCreate(table_guests, 'Guest');
@@ -121,8 +122,6 @@ function CheckSpots() {
 
 	for(let i = 0; i < parking_spots.length; i++) {
 		if(parking_spots[i].occupied != newSpots[i].occupied) {
-			console.log("found discrepancy: " + newSpots[i].number + " changed");
-			console.log("Different than " + parking_spots[i].number);
 			parking_spots[i].occupied = newSpots[i].occupied;
 			updateSpot(parking_spots[i].type, parking_spots[i].number, parking_spots[i].occupied);
 		}
@@ -131,14 +130,16 @@ function CheckSpots() {
 
 function updateSpot(type, number, occupied) {
 	let targetTable;
-
 	switch(type) {
 		case "Guest":
 			targetTable = table_guests;
+      break;
 		case "Student":
 			targetTable = table_students;
+      break;
 		case "Staff":
 			targetTable = table_staff;
+      break;
 	}
 	
 	let rowNumber;
@@ -153,12 +154,9 @@ function updateSpot(type, number, occupied) {
 	}
 	
 	editSpotStatus(targetTable.rows[rowNumber].cells[columnNumber], occupied)
-	console.log(rowNumber);
-	console.log(columnNumber);
+
 }
 
 setInterval(function(){
 	CheckSpots();
 }, 1000)
-
-// mainTable.rows[startCellY].cells[startCellX].classList.add('start-cell');
