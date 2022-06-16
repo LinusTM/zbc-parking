@@ -65,8 +65,7 @@ def accounts():
 @app.route("/data/spots")
 def get_spots():
    spots = GetParkingSpots()
-   spotsj = json.dumps(list(spots))
-   return spotsj
+   return DataclassListToJson(spots)
 
 # Takes post request for changing occupied status from parking spots
 @app.route("/data/api", methods=['POST'])
@@ -85,6 +84,22 @@ def get_receipts():
    activity = GetParkingActivity(bizz_serial)
    print(activity)
    return jsonify(activity)
+
+
+@app.route("/model/scanner")
+def get_scanner():
+   content = request.json
+   id = content['serialNr']
+   number = content['spotNr']
+   FlipOccupiedStatus(1, number)
+
+@app.route("spots/update/<spot_number>")
+def update_spot(spot_number):
+   content = request.json
+   type = content['spot_type']
+   number = content['spot_number']
+   occupied = content['occupied']
+   UpdateSpotStatus(type, number, occupied)
 
 if __name__ == "__main__":
 	app.run(debug=True)
