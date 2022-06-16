@@ -6,6 +6,8 @@ var table_guests = document.getElementById('parking-guests');
 var table_staff = document.getElementById('parking-staff');
 var table_students = document.getElementById('parking-students');
 
+let checking = false;
+
 // Transform the spots JSON variable into an array
 var parking_spots = JSON.parse(spots);
 
@@ -34,6 +36,15 @@ function tableCreate(table, type){
 
 }
 
+function editSpotStatus(cell, occupied) {
+    if(occupied) {
+      var imageAddress = "url('../static/style/Images/" + getRandomCarImage() + "')"
+      cell.style.backgroundImage = imageAddress;
+    } else {
+    	cell.style.backgroundImage = '';
+    }
+}
+
   function addTableCell(spot, row) {
     var td = row.insertCell();
     td.classList.add("park-spot");
@@ -41,13 +52,7 @@ function tableCreate(table, type){
       tableCellClick(spot,td);
     }; 
 
-         
-    if(spot.occupied) {
-      var imageAddress = "url('../static/style/Images/" + getRandomCarImage() + "')"
-      td.style.backgroundImage = imageAddress; //"url('../static/style/Images/')";
-    } else {
-      td.style.backgroundImage = '';
-    }
+	editSpotStatus(td, spot.occupied);
   }
 
   // Action to be performed by clicking on a parking spot
@@ -101,4 +106,59 @@ let freeStatus = document.querySelector("#infoBoxTaken h2");
   }
 
 
-  // mainTable.rows[startCellY].cells[startCellX].classList.add('start-cell');
+// Cchecking for updates between database and existing spots
+let newSpots;
+
+function CheckSpots() {
+	$.ajax({
+		url: "/data/spots",
+		type: "GET",
+		dataType: "json",
+		success: function(result) {
+			newSpots = result;
+		}
+	});
+
+	for(let i = 0; i < parking_spots.length; i++) {
+		if(parking_spots[i].occupied != newSpots[i].occupied) {
+			console.log("found discrepancy: " + newSpots[i].number + " changed");
+			console.log("Different than " + parking_spots[i].number);
+			parking_spots[i].occupied = newSpots[i].occupied;
+			updateSpot(parking_spots[i].type, parking_spots[i].number, parking_spots[i].occupied);
+		}
+	}
+}
+
+function updateSpot(type, number, occupied) {
+	let targetTable;
+
+	switch(type) {
+		case "Guest":
+			targetTable = table_guests;
+		case "Student":
+			targetTable = table_students;
+		case "Staff":
+			targetTable = table_staff;
+	}
+	
+	let rowNumber;
+	let columnNumber;
+
+	rowNumber = number % 2 == 0 ? 1 : 0;
+	
+	if(number % 2 == 0) {
+		columnNumber = number / 2 - 1;
+	} else {
+		columnNumber = Math.floor(number / 2);
+	}
+	
+	editSpotStatus(targetTable.rows[rowNumber].cells[columnNumber], occupied)
+	console.log(rowNumber);
+	console.log(columnNumber);
+}
+
+setInterval(function(){
+	CheckSpots();
+}, 1000)
+
+// mainTable.rows[startCellY].cells[startCellX].classList.add('start-cell');
