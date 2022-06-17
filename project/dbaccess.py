@@ -297,6 +297,22 @@ def SetSpotStatus(spot_number, spot_type, occupied):
         if conn is not None:
             conn.close()
 
+def FlipStatus(spot_type, spot_number):
+    try:
+        print(spot_type)
+        conn = GetConnection()
+        cur = conn.cursor()
+        cur.execute("UPDATE parking_spots SET occupied = !occupied WHERE spot_number = %(spot_number)s AND spot_role_type = %(spot_type)s'", {'spot_number': spot_number, 'spot_type': spot_type})
+
+        conn.commit()
+        return True
+    except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+    finally:
+        cur.close()
+        if conn is not None:
+            conn.close()
+
 def InsertEntrance(parkbizz_serial, timestamp):
     try:
         conn = GetConnection()

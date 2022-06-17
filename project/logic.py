@@ -7,6 +7,7 @@ from datetime import *
 import math
 import dataclasses
 import json
+import requests
 
 
 
@@ -128,7 +129,10 @@ def GetParkingActivity(parkbizz_serial):
     return GetLatestActivity(parkbizz_serial)
 
 def FlipOccupiedStatus(type, number):
-    FlipStatus(type, number)
+    success = FlipStatus(type, number)
+    # if (success):
+    #     requests.post("http://10.108.149.14:8080/pin", None, json = {type: "Guest", number: number, occupied: })
+
 
 def DataclassListToJson(list):
     list_dict = []
