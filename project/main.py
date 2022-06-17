@@ -92,9 +92,11 @@ def get_scanner():
    number = content['spotNr']
    FlipOccupiedStatus(1, number)
 
-@app.route("/spots/update/<spot_number>")
-def update_spot(spot_number):
-   content = request.json
+@app.route("/spots/update", methods=['POST'])
+def update_spot():
+   print(request.is_json())
+   content = request.get_json()
+   print('got content')
    type = content['spot_type']
    number = content['spot_number']
    occupied = content['occupied']

@@ -11,41 +11,78 @@ let checking = false;
 
 // Transform the spots JSON variable into an array
 var parking_spots = JSON.parse(spots);
+var selectedSlot;
 
 
 tableCreate(table_staff, 'Staff');
 tableCreate(table_students, 'Student');
 tableCreate(table_guests, 'Guest');
 
+syncRaspberry();
+
+// SYNC
+function syncRaspberry(){
+
+  var sortedArray = parking_spots.filter(spot => spot.type === 'Guest')
+
+  // Order the list based on spot number
+  sortedArray.sort((a, b) => (a.number > b.number) ? 1 : -1)
+
+  for(var i = 0; i < 8; i++){
+    sendInfo = {
+      type: 'Guest',
+      number: i + 1,
+      occupied: sortedArray[i].occupied
+    }
+    console.log('should be posting');
+    console.log(sendInfo);
+    postData('http://10.108.149.14:8080/pin', sendInfo);
+  }
+}
+
 occupied_check.addEventListener('change', function() {
 
+  var spot_number = selectedSlot.number;
   sendInfo = {
     type: 'Guest',
-    number: 2,
-    occupied: true
+    number: spot_number,
+    occupied: this.checked
   }
 
-  $.ajax({
-    type: "POST",
-    url: "10.108.149.14:8080/pin",
-    dataType: "json",
-    success: function (msg) {
-        if (msg) {
+  postData('http://10.108.149.14:8080/pin', sendInfo);
 
-      
-        } else {
+  sendOccupiedChange(this.checked)
+});
 
-        }
+function sendOccupiedChange(occupied){
+    spotData = {
+      spot_type: selectedSlot.type,
+      spot_number: selectedSlot.number,
+      occupied: occupied
+    };
+    console.log(spotData);
+    postData('/spots/update', spotData);
+ 
+}
+
+// Example POST method implementation:
+async function postData(url = '', data = {}) {
+
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST',
+    mode: 'no-cors', // no-cors, *cors, same-origin
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
     },
-    data: sendInfo
-});
-
-  if (this.checked) {
-    console.log("Checkbox is checked..");
-  } else {
-    console.log("Checkbox is not checked..");
-  }
-});
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(data)
+  });
+   // parses JSON response into native JavaScript objects
+}
 
 function tableCreate(table, type){
 
@@ -92,7 +129,7 @@ function editSpotStatus(cell, occupied) {
     // Finds the previous active spot if any
     let prevActive = document.querySelector(".active");
     let sideBox = document.querySelector("#sideBar");
-
+    selectedSlot = spot;
     // if any previous active spot is remove
     if (prevActive != undefined) {
       prevActive.classList.remove("active");
