@@ -85,12 +85,12 @@ def get_receipts():
    return jsonify(receipts)
 
 
-@app.route("/model/scanner")
+@app.route("/model/scanner", method=['POST'])
 def get_scanner():
    content = request.json
    id = content['serialNr']
    number = content['spotNr']
-   FlipOccupiedStatus(1, number)
+   FlipOccupiedStatus(3, number)
 
 @app.route("/spots/update/<spot_type>/<spot_number>/<occupied>", methods=['POST'])
 def update_spot(spot_type, spot_number, occupied):
