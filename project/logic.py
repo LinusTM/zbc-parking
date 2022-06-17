@@ -137,7 +137,14 @@ def DataclassListToJson(list):
     return json.dumps(list_dict)
 
 def UpdateSpotStatus(spot_type, spot_number, occupied):
-    UpdateSpot(spot_type, spot_number, occupied)
+    spot_type_int = 0
+    if spot_type == 'Guest':
+        spot_type_int = 3
+    if spot_type == 'Staff':
+        spot_type_int = 1
+    if spot_type == 'Student':
+        spot_type_int = 2
+    SetSpotStatus(spot_number, spot_type_int, occupied)
 
 # Return receipts related to account from database
 def GetReceipts(account_number):

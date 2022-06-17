@@ -282,6 +282,7 @@ def InsertParkbizz(serial, active, expiry, account_number):
 
 def SetSpotStatus(spot_number, spot_type, occupied):
     try:
+        print(spot_type)
         conn = GetConnection()
         cur = conn.cursor()
         cur.execute('UPDATE parking_spots SET occupied = %(occupied)s WHERE spot_number = %(spot_number)s AND spot_role_type = %(spot_type)s', {'occupied': occupied, 'spot_number': spot_number, 'spot_type': spot_type})
@@ -453,7 +454,7 @@ def GetSpots():
         cur = conn.cursor()
         
     # execute a statement
-        cur.execute("SELECT spot_number, occupied, spot_role_type FROM parking_spots")
+        cur.execute("SELECT spot_number, occupied, spot_role_type FROM parking_spots ORDER BY spot_role_type ASC, spot_number ASC")
         spots = []
 
         rows = cur.fetchall()

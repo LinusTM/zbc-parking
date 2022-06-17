@@ -60,8 +60,9 @@ function sendOccupiedChange(occupied){
       spot_number: selectedSlot.number,
       occupied: occupied
     };
-    console.log(spotData);
-    postData('/spots/update', spotData);
+    
+    console.log('Sending: type' + spotData.spot_type + ', number: ' + spotData.spot_number)
+    postData('/spots/update/' + spotData.spot_type + '/' + spotData.spot_number + '/' + occupied, spotData);
  
 }
 
