@@ -49,9 +49,11 @@ occupied_check.addEventListener('change', function() {
     occupied: this.checked
   }
 
-  postData('http://10.108.149.14:8080/pin', sendInfo);
-
   sendOccupiedChange(this.checked)
+
+  if(spotData.spot_type == 'Guest'){
+    postData('http://10.108.149.14:8080/pin', sendInfo);
+  }  
 });
 
 function sendOccupiedChange(occupied){
@@ -60,7 +62,8 @@ function sendOccupiedChange(occupied){
       spot_number: selectedSlot.number,
       occupied: occupied
     };
-    
+
+ 
     console.log('Sending: type' + spotData.spot_type + ', number: ' + spotData.spot_number)
     postData('/spots/update/' + spotData.spot_type + '/' + spotData.spot_number + '/' + occupied, spotData);
  
