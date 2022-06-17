@@ -26,9 +26,14 @@ function displayAccountInfo(account, name, cpr) {
     document.querySelector("#infoBoxAccountNr h2").innerHTML = account.account_number;
     document.querySelector("#infoBoxBalance h2").innerHTML = account.balance;
     console.log(account.parkbizzes);
+    let bizzSerial = document.querySelector("#infoBoxBizzSerial .bizz-serial");
+    let bizzExpire = document.querySelector("#infoBoxExpiryDate .bizz-expiry-date");
+    // Reset parkbizz serial and expiry date content
+    bizzSerial.innerHTML = '';
+    bizzExpire.innerHTML = '';
     account.parkbizzes.forEach(function(bizz) {
-        document.querySelector("#infoBoxBizzSerial .bizz-serial").innerHTML += "<div><h2>" + bizz.serial_number + "</h2></div>";
-        document.querySelector("#infoBoxExpiryDate .bizz-expiry-date").innerHTML += "<div><h2>" + getDateOnly(bizz.expiry_date) + "</h2></div>";
+        bizzSerial.innerHTML += "<div><h2>" + bizz.serial_number + "</h2></div>";
+        bizzExpire.innerHTML += "<div><h2>" + getDateOnly(bizz.expiry_date) + "</h2></div>";
     })
 }
 
